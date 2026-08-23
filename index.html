@@ -180,6 +180,60 @@ footer a{color:var(--accent-2);}
     </div>
   </div>
 
+  <style>
+    .dl-wrap{background:var(--surface); border:1px solid var(--border); border-radius:12px;
+      padding:26px 28px; margin:28px 0 20px;}
+    .dl-eyebrow{font-family:ui-monospace,"Cascadia Code",Consolas,monospace; font-size:12px;
+      letter-spacing:.14em; text-transform:uppercase; color:var(--accent);}
+    .dl-wrap h2{font-family:Georgia,"Noto Serif KR",serif; font-size:20px; margin:6px 0 4px;}
+    .dl-lede{margin:0 0 18px; font-size:13.5px; color:var(--muted);}
+    .dl-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:12px;}
+    .dl-card{display:flex; flex-direction:column; gap:7px; padding:16px 18px;
+      background:var(--surface-2); border:1px solid var(--border); border-radius:10px;
+      text-decoration:none; color:inherit; transition:border-color .15s, transform .15s;}
+    .dl-card:hover{border-color:var(--accent); transform:translateY(-2px);}
+    .dl-card:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
+    .dl-card .dl-role{font-family:ui-monospace,Consolas,monospace; font-size:11px;
+      letter-spacing:.06em; color:var(--accent-2);}
+    .dl-card.dl-internal .dl-role{color:var(--risk);}
+    .dl-card .dl-name{font-size:15.5px; font-weight:600; line-height:1.35;}
+    .dl-card .dl-desc{font-size:13px; color:var(--muted); line-height:1.5;}
+    .dl-card .dl-fmt{font-family:ui-monospace,Consolas,monospace; font-size:11px;
+      color:var(--muted); border-top:1px solid var(--border); padding-top:7px; margin-top:auto;}
+    .dl-note{margin:14px 0 0; font-size:12.5px; color:var(--muted);}
+    .dl-note b{color:var(--risk);}
+    @media (max-width:760px){ .dl-grid{grid-template-columns:1fr;} }
+  </style>
+
+  <div class="dl-wrap">
+    <span class="dl-eyebrow">SK에코플랜트 제안 · 각형강관 기둥</span>
+    <h2>제안 문서 세 종</h2>
+    <p class="dl-lede">같은 제안을 독자에 따라 세 가지 깊이로 나눠 두었습니다. 발주처에는 요약본만 나가고, 상세 문서는 실무 준비용이며, 그룹사 시뮬레이션은 사내에서만 씁니다.</p>
+
+    <div class="dl-grid">
+      <a class="dl-card" href="struct4sk-brief.html">
+        <span class="dl-role">발주처 제출용</span>
+        <span class="dl-name">골조 기둥 부재 대안 제안</span>
+        <span class="dl-desc">기둥을 각형강관 충전기둥으로 바꿨을 때 발주처 공정표에서 무엇이 빠지는지 정리했습니다. 한계 네 가지를 먼저 밝힙니다.</span>
+        <span class="dl-fmt">인쇄 A4 세로 2쪽</span>
+      </a>
+      <a class="dl-card" href="struct4sk.html">
+        <span class="dl-role">실무 준비용</span>
+        <span class="dl-name">각형강관 협업 제안 일정</span>
+        <span class="dl-desc">공급원 확인 결과, 두께 경계선, 착공 4개월과 6개월 두 시나리오의 주차별 일정을 담은 상세 문서입니다.</span>
+        <span class="dl-fmt">웹 열람</span>
+      </a>
+      <a class="dl-card dl-internal" href="posco-team.html">
+        <span class="dl-role">사내 전용</span>
+        <span class="dl-name">그룹사 협업 미팅 시뮬레이션</span>
+        <span class="dl-desc">그룹사 네 곳의 역할 분담과 1차부터 3차까지 미팅 구성입니다. 1차에는 두 곳만 들어갑니다.</span>
+        <span class="dl-fmt">인쇄 A4 가로 1쪽</span>
+      </a>
+    </div>
+
+    <p class="dl-note"><b>주의.</b> 세 번째 문서는 그룹사 내부 조율용입니다. 발주처에 전달하지 않습니다.</p>
+  </div>
+
   <div class="panel reco-panel">
     <h2>🎯 한국 철강사 임원 추천 — 신규 사업 아이템 Top 3 <span style="font-size:12px;color:var(--muted);font-weight:400;">(구조재 중심 재편집)</span></h2>
     <p style="margin:-6px 0 18px;font-size:13.5px;color:var(--muted)">한국 철강사의 강점 — 전세계 50개국 이상 코일센터 네트워크(현지 가공·즉납), 미국·인도·인도네시아 현지 제선·제강 기반(현지산 인정) — 을 이번 주 <b>구조재(내화강재·형강·PC 골조)</b> 수요 신호에 대입한 추천. ①번은 이미 국내에서 실제 진행 중인 사례.</p>
