@@ -42,76 +42,91 @@
   body {
     margin:0; background:var(--paper); color:var(--ink);
     font-family:"IBM Plex Sans KR", -apple-system, "Malgun Gothic", sans-serif;
-    font-size:12.5px; line-height:1.52; -webkit-font-smoothing:antialiased; word-break:keep-all;
+    font-size:12.5px; line-height:1.55; -webkit-font-smoothing:antialiased; word-break:keep-all;
   }
   .sheet {
     max-width:1180px; margin:22px auto 60px; background:var(--sheet);
     border:1px solid var(--line); border-radius:2px;
-    padding:24px 30px 26px;
-    display:flex; flex-direction:column; gap:13px;
+    padding:26px 30px 28px;
+    display:flex; flex-direction:column; gap:15px;
   }
   .mono { font-family:"IBM Plex Mono", ui-monospace, monospace; font-variant-numeric:tabular-nums; }
 
-  .head { border-bottom:2px solid var(--brand); padding-bottom:10px; display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:8px 20px; }
-  .head .l { display:flex; flex-direction:column; gap:4px; }
+  .head { border-bottom:2px solid var(--brand); padding-bottom:11px; display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:8px 20px; }
+  .head .l { display:flex; flex-direction:column; gap:5px; }
   .head .kicker { font-family:"IBM Plex Mono", monospace; font-size:9.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--brand); }
-  .head h1 { margin:0; font-size:21px; font-weight:700; letter-spacing:-.02em; line-height:1.2; }
+  .head h1 { margin:0; font-size:22px; font-weight:700; letter-spacing:-.02em; line-height:1.2; }
   .head .r { font-size:10.5px; color:var(--ink-3); text-align:right; line-height:1.7; }
   .head .r b { color:var(--ink-2); font-weight:500; }
 
-  .rule { background:var(--brand); color:#F1F6F8; border-radius:2px; padding:11px 16px; font-size:13px; font-weight:600; line-height:1.5; }
+  .rule { background:var(--brand); color:#F1F6F8; border-radius:2px; padding:11px 16px; font-size:13.5px; font-weight:600; line-height:1.5; }
   :root[data-theme="dark"] .rule { color:#0D1315; }
   @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .rule { color:#0D1315; } }
-  .rule span { display:block; font-weight:400; font-size:11px; opacity:.9; margin-top:4px; }
+  .rule span { display:block; font-weight:400; font-size:11.5px; opacity:.9; margin-top:4px; }
 
-  h2 { margin:0 0 6px; font-size:12px; font-weight:600; color:var(--ink-2); }
+  h2 { margin:0 0 7px; font-size:12.5px; font-weight:600; letter-spacing:.01em; color:var(--ink-2); }
 
-  .cols { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  /* 팀 구성 */
+  .team { display:grid; grid-template-columns:repeat(5,1fr); gap:8px; }
+  .co { border:1px solid var(--line); border-radius:2px; padding:10px 12px; display:flex; flex-direction:column; gap:4px; }
+  .co.out { border-style:dashed; background:var(--tint); }
+  .co .nm { font-size:12px; font-weight:600; }
+  .co .rl { font-size:10.5px; color:var(--ink-3); font-family:"IBM Plex Mono", monospace; letter-spacing:.03em; }
+  .co .ds { font-size:11px; color:var(--ink-2); }
 
+  /* 매트릭스 */
   .scroll { overflow-x:auto; }
-  table { border-collapse:collapse; width:100%; font-size:11.5px; }
-  th, td { text-align:left; padding:7px 9px; border:1px solid var(--line-soft); vertical-align:top; }
-  thead th { font-size:10.5px; font-weight:600; border-color:var(--line); background:var(--tint); color:var(--ink-3); }
+  table { border-collapse:collapse; width:100%; min-width:900px; font-size:11.5px; }
+  th, td { text-align:left; padding:8px 10px; border:1px solid var(--line-soft); vertical-align:top; }
+  thead th { font-size:11px; font-weight:600; border-color:var(--line); }
   thead th.c1 { background:var(--m1s); color:var(--m1); }
   thead th.c2 { background:var(--m2s); color:var(--m2); }
   thead th.c3 { background:var(--m3s); color:var(--m3); }
-  thead th .w { display:block; font-family:"IBM Plex Mono", monospace; font-size:9.5px; letter-spacing:.06em; font-weight:400; opacity:.85; }
-  tbody th { background:var(--tint); font-weight:600; font-size:11.5px; white-space:nowrap; width:124px; }
+  thead th .w { display:block; font-family:"IBM Plex Mono", monospace; font-size:9.5px; letter-spacing:.08em; font-weight:400; opacity:.85; }
+  tbody th { background:var(--tint); font-weight:600; font-size:11.5px; white-space:nowrap; width:132px; }
   td.none { color:var(--ink-3); background:var(--tint); font-family:"IBM Plex Mono", monospace; font-size:10.5px; }
-  td.tbd { background:var(--stop-soft); color:var(--stop); }
   td b { font-weight:600; }
-  .mtx { min-width:880px; }
 
+  /* 미팅 요약 3칸 */
   .mtgs { display:grid; grid-template-columns:repeat(3,1fr); gap:9px; }
-  .mtg { border:1px solid var(--line); border-radius:2px; padding:10px 12px; display:flex; flex-direction:column; gap:5px; }
-  .mtg.a { border-color:var(--m1); } .mtg.b { border-color:var(--m2); } .mtg.c { border-color:var(--m3); }
+  .mtg { border:1px solid var(--line); border-radius:2px; padding:11px 13px; display:flex; flex-direction:column; gap:6px; }
+  .mtg.a { border-color:var(--m1); }
+  .mtg.b { border-color:var(--m2); }
+  .mtg.c { border-color:var(--m3); }
   .mtg .tt { font-size:11.5px; font-weight:600; }
-  .mtg.a .tt { color:var(--m1); } .mtg.b .tt { color:var(--m2); } .mtg.c .tt { color:var(--m3); }
-  .mtg dl { margin:0; display:grid; grid-template-columns:40px 1fr; gap:3px 8px; font-size:11px; }
+  .mtg.a .tt { color:var(--m1); }
+  .mtg.b .tt { color:var(--m2); }
+  .mtg.c .tt { color:var(--m3); }
+  .mtg dl { margin:0; display:grid; grid-template-columns:44px 1fr; gap:4px 9px; font-size:11px; }
   .mtg dt { color:var(--ink-3); }
   .mtg dd { margin:0; color:var(--ink-2); }
   .mtg dd b { color:var(--ink); }
 
-  .box { border:1px solid var(--line); border-radius:2px; padding:11px 13px; display:flex; flex-direction:column; gap:6px; }
+  /* 하단 2단 */
+  .bottom { display:grid; grid-template-columns:1.15fr 1fr; gap:14px; }
+  .box { border:1px solid var(--line); border-radius:2px; padding:12px 14px; display:flex; flex-direction:column; gap:7px; }
   .box.warn { border-color:var(--stop); background:var(--stop-soft); }
   .box.warn h2 { color:var(--stop); }
-  ul, ol { margin:0; padding-left:15px; display:flex; flex-direction:column; gap:5px; }
+  ul, ol { margin:0; padding-left:16px; display:flex; flex-direction:column; gap:5px; }
   li { font-size:11.5px; color:var(--ink-2); }
   li b { color:var(--ink); font-weight:600; }
 
-  .foot { border-top:1px solid var(--line); padding-top:8px; font-size:10px; color:var(--ink-3); }
+  .foot { border-top:1px solid var(--line); padding-top:9px; font-size:10px; color:var(--ink-3); }
 
-  @media (max-width:900px) { .cols, .mtgs { grid-template-columns:1fr; } }
+  @media (max-width:900px) {
+    .team { grid-template-columns:1fr 1fr; }
+    .mtgs, .bottom { grid-template-columns:1fr; }
+  }
 
   @media print {
-    body { background:#fff; font-size:8pt; line-height:1.4; }
-    .sheet { max-width:none; margin:0; border:0; border-radius:0; padding:0; gap:7px; }
-    table { font-size:7.2pt; } .mtx { min-width:0; }
-    th, td { padding:3px 5px; }
-    .head h1 { font-size:15pt; }
-    .rule { font-size:9pt; padding:7px 10px; }
-    li, .mtg dl { font-size:7.2pt; }
-    @page { size:A4 landscape; margin:9mm 10mm; }
+    body { background:#fff; font-size:8.4pt; line-height:1.42; }
+    .sheet { max-width:none; margin:0; border:0; border-radius:0; padding:0; gap:8px; }
+    table { min-width:0; font-size:7.6pt; }
+    th, td { padding:4px 6px; }
+    .head h1 { font-size:16pt; }
+    .rule { font-size:9.4pt; padding:8px 11px; }
+    li, .mtg dl, .co .ds { font-size:7.6pt; }
+    @page { size:A4 landscape; margin:10mm 11mm; }
   }
 </style>
 
@@ -119,50 +134,47 @@
 
   <div class="head">
     <div class="l">
-      <div class="kicker">사내 전용 · 그룹사 합동 제안 · 미팅 3회</div>
-      <h1>다현장 표준 부재 제안, 그룹사 역할 분담</h1>
+      <div class="kicker">그룹사 합동 제안 · 미팅 3회 시뮬레이션</div>
+      <h1>각형강관 기둥 제안, 그룹사 역할 분담</h1>
     </div>
     <div class="r">
-      대상 <b>SK에코플랜트 AI데이터센터 사업단 · 구조설계 · 구매</b><br>
+      제안 대상 <b>SK에코플랜트 AI데이터센터 사업단 · 구조설계 · 구매</b><br>
       작성 <b class="mono">2026. 8. 23.</b>
     </div>
   </div>
 
   <div class="rule">
-    파는 것은 강관이 아니라 승인입니다. 그 승인을 만드는 곳이 포스코에이앤씨입니다.
-    <span>선행 현장에서 표준상세와 인정 대조표, 검측 절차를 만들고 후속 현장이 재사용합니다. 소재 공급보다 이 자산을 누가 만들고 관리하는지가 이번 협업의 중심입니다.</span>
+    첫 미팅에 그룹사 넷이 모두 들어가지 않습니다. 두 곳만 갑니다.
+    <span>넷이 한꺼번에 앉으면 발주처는 기술 협업이 아니라 영업 공세로 읽습니다. 소재를 책임지는 곳과 설계 언어를 쓰는 곳만 먼저 들어가고, 계약과 가공은 조건이 나온 뒤에 붙입니다.</span>
   </div>
 
-  <div class="cols">
-    <div>
-      <h2>공정 사슬과 담당</h2>
-      <div class="scroll">
-        <table>
-          <thead><tr><th>공정</th><th>담당</th><th>검사 항목</th></tr></thead>
-          <tbody>
-            <tr><td>열연코일</td><td><b>포스코</b></td><td>밀시트</td></tr>
-            <tr><td>각관 성형</td><td>강관사</td><td>치수, 시임부 검사</td></tr>
-            <tr><td><b>보강 일체화</b></td><td><b>포스코모빌리티솔루션</b></td><td>보강 위치, 용접부</td></tr>
-            <tr><td>구멍과 접합부 가공</td><td><b>포스코모빌리티솔루션</b></td><td>치수 정밀도</td></tr>
-            <tr><td><b>내화도료 도장</b></td><td><b>포스코모빌리티솔루션</b><br>자체 도장 라인. 초과분 외주</td><td>도막 두께</td></tr>
-            <tr><td>납품과 검수</td><td><b>포스코인터내셔널</b></td><td>이력 추적</td></tr>
-          </tbody>
-        </table>
+  <div>
+    <h2>팀 구성과 책임 경계</h2>
+    <div class="team">
+      <div class="co">
+        <div class="nm">포스코</div>
+        <div class="rl">PRIME · 소재</div>
+        <div class="ds">열연코일 안정 생산과 적기 공급. 각관 제조사와 전략적 관계를 맺어 팀을 묶는 주관사</div>
       </div>
-    </div>
-    <div>
-      <h2>역할과 책임 경계</h2>
-      <div class="scroll">
-        <table>
-          <thead><tr><th>그룹사</th><th>역할</th><th>책임 끝나는 지점</th></tr></thead>
-          <tbody>
-            <tr><td><b>포스코</b></td><td>소재 공급, 강관사와 전략 관계, 팀 주관</td><td>코일 출하</td></tr>
-            <tr><td><b>포스코에이앤씨</b></td><td><b>승인 자산 구축.</b> 표준상세, 인정 대조표, 인허가 대응</td><td>설계 도서 승인</td></tr>
-            <tr><td><b>포스코모빌리티솔루션</b></td><td><b>보강 일체화, 가공, 내화도료 도장</b></td><td>도장 검사 합격</td></tr>
-            <tr><td><b>포스코인터내셔널</b></td><td>표준품 계약, 다현장 납품과 이력 관리</td><td>현장 인도</td></tr>
-            <tr><td>강관사, 외주 도장사</td><td>성형, 캐파 초과분 도장</td><td>각 공정 검사</td></tr>
-          </tbody>
-        </table>
+      <div class="co">
+        <div class="nm">포스코에이앤씨</div>
+        <div class="rl">설계 · 인허가</div>
+        <div class="ds">대체 설계와 물량 비교, 기둥 상세 변경의 인허가 처리 방향 자문</div>
+      </div>
+      <div class="co">
+        <div class="nm">포스코인터내셔널</div>
+        <div class="rl">계약 · 납품관리</div>
+        <div class="ds">국내 건설자재 유통 경험을 살린 표준 부품 납품 계약과 검수, 이력 관리</div>
+      </div>
+      <div class="co">
+        <div class="nm">포스코모빌리티솔루션</div>
+        <div class="rl">가공</div>
+        <div class="ds">철구 제작 역량을 활용한 각관 가공 분담. 보강판 세트 사전제작</div>
+      </div>
+      <div class="co out">
+        <div class="nm">각관 제조사 · 가공공장</div>
+        <div class="rl">외부 파트너</div>
+        <div class="ds">각관 성형과 인증 보유. 철골 가공공장 2사 이상. 3차부터 합류</div>
       </div>
     </div>
   </div>
@@ -170,51 +182,51 @@
   <div>
     <h2>미팅별 역할 배분</h2>
     <div class="scroll">
-      <table class="mtx">
+      <table>
         <thead>
           <tr>
-            <th style="width:124px">구분</th>
+            <th style="width:132px">구분</th>
             <th class="c1">1차 · 문제 공유<span class="w">첫날 90분 · 2개사</span></th>
-            <th class="c2">2차 · 대체 설계와 조건<span class="w">3~4주 뒤 · 3개사</span></th>
-            <th class="c3">3차 · 실행 체계 확정<span class="w">7~8주 뒤 · 전원</span></th>
+            <th class="c2">2차 · 조건과 대체 설계<span class="w">3~4주 뒤 반나절 · 3개사</span></th>
+            <th class="c3">3차 · 실행 체계 확정<span class="w">7~8주 뒤 반나절 · 전원</span></th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <th>포스코</th>
-            <td><b>주 발언.</b> 여러 현장을 동시에 지을 때 골조가 걸리는 지점을 짚는다. 각관을 직접 만들지 않는다는 점을 먼저 밝힌다</td>
-            <td>소재 확보 범위와 가격 연동 방식. 강관사와 맺은 관계를 공급 보증으로 설명</td>
-            <td>소재 확약 문안 확정. 팀 창구를 하나로 유지</td>
+            <td><b>주 발언.</b> 골조 소재 수급 구조를 설명하고 열연 공급을 약속한다. 각관을 직접 만들지 않는다는 점을 먼저 밝힌다</td>
+            <td>소재 확보 범위와 가격 연동 방식 제시. 각관 제조사와 맺은 관계를 공급 보증으로 설명</td>
+            <td>소재 확약과 공급 보증 문안 확정. 팀 전체 창구를 하나로 유지</td>
           </tr>
           <tr>
             <th>포스코에이앤씨</th>
-            <td><b>공동 발언.</b> 선행 현장에서 만들 승인 자산 여섯 가지를 제시하고 기존 구조도서를 요청한다</td>
-            <td><b>중심 역할.</b> 대체 설계 1차안과 인허가 사전 협의 결과. 후속 현장 재사용 범위 명시</td>
-            <td>구조설계 확정안과 검측 절차. 감리 인수 방식 합의</td>
+            <td><b>공동 발언.</b> 대체 설계 방법과 인허가 처리 방향 제시. 기존 1개 층 구조도서를 요청한다</td>
+            <td><b>중심 역할.</b> 대체 설계 1차안 보고. 단면, 물량, 공정 영향. 인허가 사전 협의 결과 공유</td>
+            <td>구조설계 확정안 제출. 구조안전 확인과 감리 대응 절차 정리</td>
           </tr>
           <tr>
             <th>포스코인터내셔널</th>
             <td class="none">참석하지 않음</td>
-            <td><b>합류.</b> 표준품 계약 형태, 다현장 납품과 이력 관리 체계</td>
-            <td>공급조건 합의서 초안. 물량, 가격, 납기, 품질</td>
+            <td><b>합류.</b> 표준 부품 납품 계약 형태와 검수, 이력 관리 체계 제시</td>
+            <td>공급조건 합의서 초안 제출. 물량, 가격, 납기, 품질 네 항목</td>
           </tr>
           <tr>
             <th>포스코모빌리티솔루션</th>
             <td class="none">참석하지 않음</td>
-            <td class="none">가공과 도장 능력 서면 제출</td>
-            <td><b>합류.</b> 보강 일체화와 가공, 도장 범위. 자체 도장 캐파와 외주 전환 기준. 자체 검사 체계와 성적서 양식</td>
+            <td class="none">서면 자료만 제출</td>
+            <td><b>합류.</b> 가공 분담 범위와 보강판 세트 사전제작 방안, 시제작 일정 제시</td>
           </tr>
           <tr>
-            <th>강관사, 도장 공장</th>
+            <th>각관 제조사</th>
             <td class="none">이름만 소개</td>
-            <td class="none">사이즈표와 인정 현황 서면 제출</td>
-            <td><b>합류.</b> 사이즈와 납기, 내화도료 인정 범위 직접 설명</td>
+            <td class="none">사이즈표와 인증 현황 서면 제출</td>
+            <td><b>합류.</b> 사이즈, 납기, 인증서 직접 설명. 공급원이 둘 이상임을 확인시킨다</td>
           </tr>
           <tr>
-            <th>발주처에<br>요청할 것</th>
-            <td><b>선행 현장</b>과 착공 목표. 기존 사례 한 개 층 구조도서. 후속 적용 후보 사이트</td>
-            <td>구매조건 네 항목 회신. 인허가 처리 방침</td>
-            <td><b>설계 동결 시점</b>. 제작 검사 절차 승인과 재고 사전 검수 채택 여부</td>
+            <th>SK에코플랜트에<br>요청할 것</th>
+            <td>대상 현장과 착공 목표 시점. 기존 사례 한 개 층 구조도서. 다음 회의 참석자</td>
+            <td>구매조건 네 항목 회신. 인허가 처리 방침을 두고 나온 사내 의견</td>
+            <td>적용 범위 확정과 계약 형태 선택. 부재 발주 시점 합의</td>
           </tr>
         </tbody>
       </table>
@@ -225,52 +237,49 @@
     <div class="mtg a">
       <div class="tt">1차 미팅</div>
       <dl>
-        <dt>목적</dt><dd>제품 소개가 아니라 <b>다현장에서 골조가 걸리는 지점</b>을 함께 정의</dd>
-        <dt>산출물</dt><dd>선행 현장 지정, 구조도서 수령 약속</dd>
-        <dt>금지</dt><dd>가격, 계약, 물량</dd>
+        <dt>목적</dt><dd>제품 소개가 아니라 <b>골조 소재 위험을 함께 정의</b>하는 자리</dd>
+        <dt>산출물</dt><dd>공동 검토 착수 합의, 구조도서 수령 약속</dd>
+        <dt>금지</dt><dd>가격, 계약, 물량 이야기</dd>
       </dl>
     </div>
     <div class="mtg b">
       <div class="tt">2차 미팅</div>
       <dl>
         <dt>목적</dt><dd>대체 설계 중간 결과와 <b>구매조건 네 항목</b> 협의</dd>
-        <dt>산출물</dt><dd>물량과 공정 비교, 인허가 회신</dd>
+        <dt>산출물</dt><dd>단면과 물량 비교표, 인허가 사전 협의 회신</dd>
         <dt>금지</dt><dd>확정되지 않은 원가 우위 주장</dd>
       </dl>
     </div>
     <div class="mtg c">
       <div class="tt">3차 미팅</div>
       <dl>
-        <dt>목적</dt><dd>제작과 도장, 납품 체계를 <b>실행 가능한 형태로 확정</b></dd>
+        <dt>목적</dt><dd>제작과 가공, 납품 체계를 <b>실행 가능한 형태로 확정</b></dd>
         <dt>산출물</dt><dd>공급조건 합의서, 역할 분담표, 마스터 일정</dd>
-        <dt>금지</dt><dd>각사가 회사 소개를 반복하는 것</dd>
+        <dt>금지</dt><dd>각사가 각자 회사 소개를 반복하는 것</dd>
       </dl>
     </div>
   </div>
 
-  <div class="cols">
+  <div class="bottom">
     <div class="box">
       <h2>이 구성이 발주처에 주는 값</h2>
       <ul>
-        <li><b>창구가 하나입니다.</b> 소재부터 가공, 도장, 납품까지 여러 곳이 움직이지만 발주처는 주관사 한 곳을 상대합니다.</li>
-        <li><b>설계 언어로 대화합니다.</b> 설계회사가 처음부터 들어가므로 자재 영업이 아니라 기술 검토로 진행됩니다.</li>
-        <li><b>승인이 재사용됩니다.</b> 선행 현장에서 만든 표준상세와 인정 대조표를 후속 현장이 그대로 씁니다.</li>
-        <li><b>보강부터 도장까지 한 회사에서 이어집니다.</b> 인계점이 줄고 제작 검사도 한곳에서 끝납니다.</li>
-        <li><b>감리 부담이 늘지 않습니다.</b> 제작 검사는 공장이 맡고 감리는 반입 검사에 집중합니다. 원하면 재고 사전 검수를 더할 수 있습니다.</li>
-        <li><b>책임 경계가 그려져 있습니다.</b> 각 공정의 인계 지점과 확인 항목이 정해져 있습니다.</li>
+        <li><b>창구가 하나다.</b> 소재부터 가공, 납품까지 네 곳이 움직이지만 발주처가 상대하는 곳은 주관사 한 곳이다</li>
+        <li><b>설계 언어로 대화한다.</b> 설계회사가 처음부터 들어가므로 자재 영업이 아니라 기술 검토로 진행된다</li>
+        <li><b>공급원이 둘 이상이다.</b> 각관 제조사를 복수로 두어 구매가 요구하는 조건을 처음부터 맞춘다</li>
+        <li><b>책임 경계가 그려져 있다.</b> 소재는 주관사, 부재는 제조사, 가공은 가공사, 납품과 검수는 상사가 진다</li>
       </ul>
     </div>
     <div class="box warn">
-      <h2>먼저 정리해야 할 것</h2>
+      <h2>흔히 망치는 세 가지</h2>
       <ol>
-        <li><b>도장 캐파 상한을 먼저 확인합니다.</b> 자체 라인을 넘는 물량은 외주로 갑니다. 다현장에서는 도장이 병목이 될 수 있으므로 외주 전환 기준과 품질 관리 방식을 1차 미팅 전에 정합니다.</li>
-        <li><b>첫 미팅에 그룹사 총출동은 금물입니다.</b> 넷이 앉으면 기술 협업이 아니라 영업 공세로 읽힙니다.</li>
-        <li><b>각관을 직접 만든다는 인상을 주지 않습니다.</b> 주관사는 소재를 대고 팀을 묶습니다.</li>
-        <li><b>발언은 우리가 무엇을 하느냐가 아니라 발주처 일정에서 무엇이 빠지느냐를 기준으로 합니다.</b></li>
+        <li><b>첫 미팅에 그룹사 총출동.</b> 넷이 앉으면 발주처는 압박으로 느끼고 실무 대화가 끊긴다</li>
+        <li><b>각관을 직접 만든다는 인상.</b> 주관사는 소재를 대고 팀을 묶는다. 이 사실을 먼저 밝히지 않으면 뒤에 신뢰를 잃는다</li>
+        <li><b>회사별 역량 소개의 나열.</b> 발언은 회사 기준이 아니라 <b>발주처 공정표 기준</b>으로 한다. 우리가 무엇을 하느냐가 아니라 귀사 일정에서 무엇이 빠지느냐로 말한다</li>
       </ol>
     </div>
   </div>
 
-  <div class="foot">제작 검사는 각 공장의 검사원이 수행하고 성적서를 붙여 출하합니다. 발주처 감리는 현장 반입 부재를 검사하며, 선택 사항으로 공장에서 재고 부재를 사전 검수하는 방식을 제안합니다. 회의 간격은 대체 설계 소요와 인허가 사전 협의 회신 시점을 기준으로 잡았습니다.</div>
+  <div class="foot">회의 간격은 대체 설계 소요와 인허가 사전 협의 회신 시점을 기준으로 잡았습니다. 대상 현장의 착공 목표에 따라 조정합니다.</div>
 
 </div>
