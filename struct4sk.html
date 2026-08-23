@@ -1,0 +1,765 @@
+<title>각형강관 스펙인 로드맵</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&display=swap">
+
+<style>
+  :root {
+    --paper:      #E9ECEE;
+    --surface:    #FFFFFF;
+    --surface-2:  #F3F6F7;
+    --ink:        #161A1D;
+    --ink-2:      #485257;
+    --ink-3:      #7B868B;
+    --line:       #D2D8DA;
+    --line-soft:  #E3E8E9;
+    --brand:      #1F4E5F;
+    --brand-2:    #35798C;
+    --brand-soft: #E0EAEE;
+    --go:         #2C6B4C;
+    --go-soft:    #DFEDE5;
+    --hold:       #8E6410;
+    --hold-soft:  #F2E8D3;
+    --stop:       #9E3728;
+    --stop-soft:  #F4E0DC;
+    --shadow:     0 1px 2px rgba(22,26,29,.06), 0 8px 24px -12px rgba(22,26,29,.18);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:      #101416;
+      --surface:    #191F22;
+      --surface-2:  #212A2E;
+      --ink:        #E7EDEE;
+      --ink-2:      #A6B2B6;
+      --ink-3:      #76848A;
+      --line:       #2C3639;
+      --line-soft:  #232C2F;
+      --brand:      #7CB6C7;
+      --brand-2:    #A3CFDB;
+      --brand-soft: #1B2A31;
+      --go:         #6DBE92;
+      --go-soft:    #172A21;
+      --hold:       #D6A950;
+      --hold-soft:  #2B2416;
+      --stop:       #DF8371;
+      --stop-soft:  #2E1C19;
+      --shadow:     0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.6);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --paper:      #101416;
+    --surface:    #191F22;
+    --surface-2:  #212A2E;
+    --ink:        #E7EDEE;
+    --ink-2:      #A6B2B6;
+    --ink-3:      #76848A;
+    --line:       #2C3639;
+    --line-soft:  #232C2F;
+    --brand:      #7CB6C7;
+    --brand-2:    #A3CFDB;
+    --brand-soft: #1B2A31;
+    --go:         #6DBE92;
+    --go-soft:    #172A21;
+    --hold:       #D6A950;
+    --hold-soft:  #2B2416;
+    --stop:       #DF8371;
+    --stop-soft:  #2E1C19;
+    --shadow:     0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.6);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "IBM Plex Sans KR", -apple-system, "Malgun Gothic", sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    word-break: keep-all;
+  }
+
+  .wrap {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 40px 24px 96px;
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+  }
+
+  .mono {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .eyebrow {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--brand);
+  }
+
+  h1, h2, h3 { text-wrap: balance; margin: 0; font-weight: 600; }
+
+  /* ---------- masthead ---------- */
+  .mast {
+    border-top: 3px solid var(--brand);
+    padding-top: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .mast h1 {
+    font-size: clamp(30px, 4.6vw, 46px);
+    line-height: 1.18;
+    letter-spacing: -.02em;
+    font-weight: 700;
+  }
+  .mast .lede {
+    font-size: 17px;
+    color: var(--ink-2);
+    max-width: 60ch;
+    font-weight: 300;
+  }
+  .mast-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 28px;
+    padding-top: 6px;
+    border-top: 1px solid var(--line);
+    font-size: 12.5px;
+    color: var(--ink-3);
+  }
+  .mast-meta b { color: var(--ink-2); font-weight: 500; }
+
+  /* ---------- thesis ---------- */
+  .thesis {
+    background: var(--brand);
+    color: #F2F7F9;
+    border-radius: 3px;
+    padding: 30px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+  :root[data-theme="dark"] .thesis { color: #0E1416; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .thesis { color: #0E1416; }
+  }
+  .thesis .head {
+    font-size: clamp(19px, 2.6vw, 25px);
+    font-weight: 600;
+    line-height: 1.45;
+    letter-spacing: -.01em;
+  }
+  .thesis .head span { display: block; }
+  .thesis-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 1px;
+    background: rgba(255,255,255,.22);
+    border-top: 1px solid rgba(255,255,255,.22);
+    padding-top: 1px;
+  }
+  .thesis-grid > div {
+    background: var(--brand);
+    padding: 16px 18px 4px 0;
+  }
+  .thesis-grid dt {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10.5px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    opacity: .72;
+    margin-bottom: 6px;
+  }
+  .thesis-grid dd { margin: 0; font-size: 14px; line-height: 1.55; }
+
+  /* ---------- section ---------- */
+  section { display: flex; flex-direction: column; gap: 20px; }
+  .sec-head { display: flex; flex-direction: column; gap: 6px; }
+  .sec-head h2 {
+    font-size: clamp(20px, 2.6vw, 26px);
+    letter-spacing: -.015em;
+  }
+  .sec-head p { margin: 0; color: var(--ink-2); font-size: 14.5px; max-width: 66ch; }
+
+  /* ---------- agenda ---------- */
+  .agenda { display: flex; flex-direction: column; border-top: 1px solid var(--line); }
+  .slot {
+    display: grid;
+    grid-template-columns: 92px 1fr;
+    gap: 20px;
+    padding: 15px 0;
+    border-bottom: 1px solid var(--line-soft);
+    align-items: start;
+  }
+  .slot .clock {
+    font-family: "IBM Plex Mono", monospace;
+    font-variant-numeric: tabular-nums;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--brand);
+    padding-top: 2px;
+  }
+  .slot .clock small { display: block; font-weight: 400; color: var(--ink-3); font-size: 11px; letter-spacing: .04em; }
+  .slot h3 { font-size: 15.5px; font-weight: 600; margin-bottom: 3px; }
+  .slot p { margin: 0; color: var(--ink-2); font-size: 14px; }
+  .slot.pivot { background: var(--brand-soft); padding-left: 14px; padding-right: 14px; margin-left: -14px; margin-right: -14px; }
+  .slot.pivot h3::after {
+    content: "결정적 구간";
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10px;
+    letter-spacing: .1em;
+    color: var(--brand);
+    border: 1px solid var(--brand);
+    border-radius: 2px;
+    padding: 1px 6px;
+    margin-left: 9px;
+    vertical-align: 2px;
+    white-space: nowrap;
+  }
+
+  /* ---------- gates ---------- */
+  .gates { display: flex; flex-direction: column; gap: 0; }
+  .gate {
+    display: grid;
+    grid-template-columns: 132px 1fr;
+    gap: 0 26px;
+    position: relative;
+  }
+  .rail {
+    position: relative;
+    padding: 26px 0 26px;
+    border-right: 1px solid var(--line);
+  }
+  .rail::after {
+    content: "";
+    position: absolute;
+    right: -5px;
+    top: 32px;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--brand);
+    box-shadow: 0 0 0 4px var(--paper);
+  }
+  .gate:last-child .rail { border-right-color: transparent; }
+  .gate:last-child .rail::after { background: var(--go); }
+  .rail .code {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -.01em;
+    color: var(--brand);
+    line-height: 1;
+  }
+  .rail .when {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11.5px;
+    color: var(--ink-3);
+    margin-top: 8px;
+    line-height: 1.5;
+  }
+  .rail .dur {
+    display: inline-block;
+    margin-top: 8px;
+    font-size: 11px;
+    font-family: "IBM Plex Mono", monospace;
+    color: var(--ink-2);
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    padding: 1px 7px;
+  }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    box-shadow: var(--shadow);
+    padding: 22px 24px;
+    margin: 26px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .card > header { display: flex; flex-direction: column; gap: 5px; }
+  .card h3 { font-size: 18px; letter-spacing: -.01em; }
+  .card .who {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    letter-spacing: .06em;
+    color: var(--ink-3);
+  }
+  .card .goal { margin: 0; color: var(--ink-2); font-size: 14.5px; }
+
+  .out { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 7px; }
+  .out li {
+    display: grid;
+    grid-template-columns: 20px 1fr;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--ink-2);
+  }
+  .out li::before {
+    content: counter(o);
+    counter-increment: o;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10.5px;
+    color: var(--brand);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    height: 17px;
+    display: grid;
+    place-items: center;
+    margin-top: 3px;
+  }
+  .out { counter-reset: o; }
+  .out strong { color: var(--ink); font-weight: 600; }
+
+  .judge { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .judge > div {
+    border-radius: 3px;
+    padding: 11px 14px;
+    font-size: 13.5px;
+    line-height: 1.5;
+  }
+  .judge .pass { background: var(--go-soft); color: var(--go); }
+  .judge .fail { background: var(--stop-soft); color: var(--stop); }
+  .judge b {
+    display: block;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    opacity: .85;
+  }
+
+  /* ---------- tables ---------- */
+  .scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: 3px; background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; min-width: 620px; font-size: 13.5px; }
+  th, td { text-align: left; padding: 11px 15px; border-bottom: 1px solid var(--line-soft); vertical-align: top; }
+  thead th {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10.5px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    font-weight: 600;
+    background: var(--surface-2);
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  td b { font-weight: 600; }
+  .tag {
+    display: inline-block;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10.5px;
+    letter-spacing: .06em;
+    padding: 1px 7px;
+    border-radius: 2px;
+    white-space: nowrap;
+  }
+  .tag.p1 { background: var(--brand-soft); color: var(--brand); }
+  .tag.p2 { background: var(--hold-soft); color: var(--hold); }
+  .tag.p3 { background: var(--surface-2); color: var(--ink-3); border: 1px solid var(--line); }
+
+  /* ---------- do / dont ---------- */
+  .duo { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .panel {
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    background: var(--surface);
+    padding: 20px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .panel h3 { font-size: 15px; display: flex; align-items: center; gap: 9px; }
+  .panel h3::before {
+    content: "";
+    width: 3px;
+    height: 15px;
+    border-radius: 2px;
+    background: var(--go);
+  }
+  .panel.no h3::before { background: var(--stop); }
+  .panel ul { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 8px; }
+  .panel li { font-size: 14px; color: var(--ink-2); }
+  .panel li strong { color: var(--ink); font-weight: 600; }
+
+  /* ---------- open items ---------- */
+  .open {
+    border: 1px dashed var(--hold);
+    background: var(--hold-soft);
+    border-radius: 3px;
+    padding: 20px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .open h3 { font-size: 15px; color: var(--hold); }
+  .open ol { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 7px; }
+  .open li { font-size: 14px; color: var(--ink-2); }
+  .open li strong { color: var(--ink); font-weight: 600; }
+
+  footer {
+    border-top: 1px solid var(--line);
+    padding-top: 18px;
+    font-size: 12.5px;
+    color: var(--ink-3);
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  @media (max-width: 720px) {
+    .gate { grid-template-columns: 1fr; }
+    .rail { border-right: 0; border-left: 1px solid var(--line); padding: 20px 0 0 18px; display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+    .rail::after { right: auto; left: -5px; top: 26px; }
+    .rail .when, .rail .dur { margin-top: 0; }
+    .card { margin: 12px 0 26px 18px; }
+    .judge, .duo { grid-template-columns: 1fr; }
+    .slot { grid-template-columns: 74px 1fr; gap: 14px; }
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="mast">
+    <div class="eyebrow">첫 미팅 제안 자료 · 구조재 한정</div>
+    <h1>열연 기반 대형 각형강관<br>표준 구조재 스펙인 로드맵</h1>
+    <p class="lede">후판 슬롯 압박을 받는 데이터센터 골조에 대해, 열연코일 롤포밍 대형 각형강관을 표준 부재로 채택하기 위한 6단계 게이트 워크플로우. 각 게이트는 산출물·판정기준·탈락조건을 갖는다.</p>
+    <div class="mast-meta">
+      <span>제안 <b>철강사 통합판매</b></span>
+      <span>대상 <b>SK에코플랜트 AI데이터센터 사업단 · 구조설계 · 구매</b></span>
+      <span>기준 시점 <b class="mono">D = 차기 사이트 기본설계 착수일</b></span>
+      <span>검토 <b>archi-struct 패널 9.4 / 10</b></span>
+    </div>
+  </header>
+
+  <div class="thesis">
+    <div class="head">
+      <span>후판 의존을 줄이고, 현장 완전용입 용접 의존도 함께 줄인다.</span>
+      <span>콘크리트 충전(CFT)으로 가면 내화 공정이 통째로 빠진다.</span>
+    </div>
+    <dl class="thesis-grid">
+      <div>
+        <dt>Supply</dt>
+        <dd>후판과 열연은 다른 밀 라인·다른 수요처를 탄다. 소재 리스크가 서로 상관되지 않는다.</dd>
+      </div>
+      <div>
+        <dt>Labor</dt>
+        <dd>블라인드볼트 접합안을 병행하면 가장 구하기 어려운 현장 CJP 용접사 수요를 줄인다.</dd>
+      </div>
+      <div>
+        <dt>Schedule</dt>
+        <dd>CFT 무피복이 인정 범위 안에 들면 내화 공정이 골조 크리티컬 패스에서 빠진다.</dd>
+      </div>
+      <div>
+        <dt>Standardization</dt>
+        <dd>롤 세트가 사이즈를 제한한다. 이 제약이 발주처의 표준설계 1종 전략과 오히려 정합한다.</dd>
+      </div>
+    </dl>
+  </div>
+
+  <section>
+    <div class="sec-head">
+      <div class="eyebrow">Gate 1 상세</div>
+      <h2>첫 미팅 90분 진행안</h2>
+      <p>이 미팅의 목적은 제품 소개가 아니라 <b>문제 정의 공유와 공동검토 합의</b>다. 성공 판정은 딱 두 가지 — 트레이드 스터디 착수 합의, 그리고 비교검토용 실제 구조도면 수령 약속을 서면으로 받는 것.</p>
+    </div>
+
+    <div class="agenda">
+      <div class="slot">
+        <div class="clock">00–10<small>10 min</small></div>
+        <div>
+          <h3>문제 정의</h3>
+          <p>후판 슬롯이 구조적으로 압박받는 원인을 공급 측 데이터로 제시. 자사 제품은 아직 꺼내지 않는다.</p>
+        </div>
+      </div>
+      <div class="slot">
+        <div class="clock">10–25<small>15 min</small></div>
+        <div>
+          <h3>대안 제시</h3>
+          <p>열연 롤포밍 대형 각형강관 + CFT. 위 헤드라인 두 문장으로 끝내고 카탈로그를 낭독하지 않는다.</p>
+        </div>
+      </div>
+      <div class="slot pivot">
+        <div class="clock">25–40<small>15 min</small></div>
+        <div>
+          <h3>약점 자진 공개</h3>
+          <p>두께 상한 / 다이어프램 공수 / 국내 적용 실적 부재 — 세 가지를 제안자가 먼저 꺼내고 각각의 대안을 붙인다. 설계자가 먼저 찾아내면 신뢰가 0이 된다.</p>
+        </div>
+      </div>
+      <div class="slot">
+        <div class="clock">40–55<small>15 min</small></div>
+        <div>
+          <h3>공동검토 설계</h3>
+          <p>트레이드 스터디 범위·지표·일정 제안. <b>귀사의 실제 1개 층 구조도면을 기준으로 하겠다</b>고 요청한다.</p>
+        </div>
+      </div>
+      <div class="slot">
+        <div class="clock">55–75<small>20 min</small></div>
+        <div>
+          <h3>질의 응답</h3>
+          <p>구조설계는 규격·해석 근거를, 구매는 리드타임·공급보증을 묻는다. 답을 모르면 모른다고 하고 회신 기한을 약속한다.</p>
+        </div>
+      </div>
+      <div class="slot pivot">
+        <div class="clock">75–90<small>15 min</small></div>
+        <div>
+          <h3>다음 단계 확정</h3>
+          <p>차기 사이트 기본설계 착수 시점, 도면 수령일, 차기 미팅 참석자(구조설계 실무 포함) — 세 항목을 회의록에 적고 그 자리에서 합의 확인.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <div class="eyebrow">Workflow</div>
+      <h2>게이트 워크플로우 G0 → G5</h2>
+      <p>단계가 아니라 게이트로 짠다. 각 게이트에는 판정기준과 <b>탈락조건</b>이 있다. 탈락조건이 없는 제안은 검토가 아니라 영업으로 읽힌다.</p>
+    </div>
+
+    <div class="gates">
+
+      <!-- G0 -->
+      <div class="gate">
+        <div class="rail">
+          <div class="code">G0</div>
+          <div class="when">D−7M → D−6M</div>
+          <span class="dur">4–6주</span>
+        </div>
+        <div class="card">
+          <header>
+            <h3>사내 준비 — 종이를 갖춰서 간다</h3>
+            <div class="who">제안자 단독 · 외부 접촉 없음</div>
+          </header>
+          <p class="goal">설계자는 새 부재를 쓰고 싶어도 책임질 근거 서류가 없으면 쓰지 못한다. 첫 미팅 전에 확보 가능한 서류를 전부 확보한다.</p>
+          <ul class="out">
+            <li><span><strong>현행 규격번호·강종·시험성적서</strong> — 건축구조용 냉간성형 각형강관 기준. 일반구조용만 있으면 미팅을 미룬다</span></li>
+            <li><span><strong>생산 가능 사이즈·두께 매트릭스</strong> — 이것 없이는 구조설계가 착수 자체를 못 한다</span></li>
+            <li><span><strong>CFT 내화구조 인정서 및 적용 범위</strong> — 단면·강도·하중비 범위 포함</span></li>
+            <li><span><strong>가공 가능 팹 리스트</strong> — 2사 이상. 단일 팹이면 구매가 반려한다</span></li>
+            <li><span><strong>후판·열연 공급구조 1페이지</strong> — 리스크가 상관되지 않는다는 논리</span></li>
+          </ul>
+          <div class="judge">
+            <div class="pass"><b>통과</b>5종 원본 확보. 사이즈별 폭두께비 판정표 전 사이즈 적합</div>
+            <div class="fail"><b>탈락</b>건축구조용 규격 미확보 → 확보 시점까지 미팅 연기</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- G1 -->
+      <div class="gate">
+        <div class="rail">
+          <div class="code">G1</div>
+          <div class="when">D−6M</div>
+          <span class="dur">90분</span>
+        </div>
+        <div class="card">
+          <header>
+            <h3>첫 미팅 — 문제 공유와 공동검토 합의</h3>
+            <div class="who">사업단(스폰서) + 구조설계 + 구매 동석</div>
+          </header>
+          <p class="goal">세 조직을 한 테이블에 앉히는 것이 이 게이트의 절반이다. 설계에만 가면 구매가 나중에 막고, 구매에만 가면 스펙에 오르지 못한다.</p>
+          <ul class="out">
+            <li><span>차기 사이트 <strong>기본설계 착수 시점(D)</strong> 확인 — 이 답이 없으면 모든 일정이 허구다</span></li>
+            <li><span>비교검토용 <strong>실제 1개 층 구조도면</strong> 수령 약속</span></li>
+            <li><span>차기 미팅 <strong>구조설계 실무자 참석</strong> 확약</span></li>
+          </ul>
+          <div class="judge">
+            <div class="pass"><b>통과</b>트레이드 스터디 착수 합의 + 도면 수령일 서면 확인</div>
+            <div class="fail"><b>탈락</b>“검토해 보겠습니다”만 남고 도면·일정·참석자가 비어 있음</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- G2 -->
+      <div class="gate">
+        <div class="rail">
+          <div class="code">G2</div>
+          <div class="when">D−5M → D−4M</div>
+          <span class="dur">6–8주</span>
+        </div>
+        <div class="card">
+          <header>
+            <h3>트레이드 스터디 — 상대의 도면으로 비교한다</h3>
+            <div class="who">공동 · 제안자 구조엔지니어 + SK 구조설계</div>
+          </header>
+          <p class="goal">비교 대상을 제안자가 고르면 안 된다. SK가 실제 지은 골조를 기준으로 후판 빌트업 대비 각형강관(+CFT)을 비교한다.</p>
+          <ul class="out">
+            <li><span>지표 ① <strong>강재 물량(ton)</strong> ② <strong>내화 공정일수</strong> ③ <strong>접합부 공수·현장 CJP 용접 연장</strong></span></li>
+            <li><span>접합부 <strong>3안 동시 제시</strong> — A 통다이어프램 / B 외다이어프램 / C 블라인드볼트 무용접</span></li>
+            <li><span>최하층 초고축력 기둥 구간의 <strong>두께 상한 성립 여부</strong>와 병용안</span></li>
+          </ul>
+          <div class="judge">
+            <div class="pass"><b>통과</b>3지표 중 2개 이상 우위 + 폭두께비 전 사이즈 적합</div>
+            <div class="fail"><b>탈락</b>두께 상한으로 최하층 기둥 미성립 &amp; 대체 병용안 없음</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- G3 -->
+      <div class="gate">
+        <div class="rail">
+          <div class="code">G3</div>
+          <div class="when">D−4M → D+2M</div>
+          <span class="dur">4–8개월</span>
+        </div>
+        <div class="card">
+          <header>
+            <h3>인정 갭 해소 — 없는 종이를 함께 만든다</h3>
+            <div class="who">공동 · SK 참여와 비용 분담이 관문</div>
+          </header>
+          <p class="goal">소재 규격은 통과해도 접합부 성능이 진짜 관문이다. 그리고 이건 제안자 혼자 만들면 힘이 없다. 상대가 시간과 비용을 넣은 검증 결과는 쉽게 버려지지 않는다.</p>
+          <ul class="out">
+            <li><span><strong>보-기둥 접합부 구조성능 실험</strong> — 목표 성능과 판정 기준을 사전 합의</span></li>
+            <li><span><strong>CFT 내화 인정 범위 대조</strong> — 범위 밖이면 신규 인정 소요를 D 이전에 끝낼 수 있는지 판정</span></li>
+            <li><span>감리가 수용 가능한 <strong>시임부·다이어프램 용접부 검측 절차</strong> 확정</span></li>
+          </ul>
+          <div class="judge">
+            <div class="pass"><b>통과</b>목표 성능 달성 + 검측 절차에 대한 감리 수용 확인</div>
+            <div class="fail"><b>탈락</b>인정 범위 밖 &amp; 신규 인정 소요가 기본설계 일정을 초과</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- G4 -->
+      <div class="gate">
+        <div class="rail">
+          <div class="code">G4</div>
+          <div class="when">G3와 병행</div>
+          <span class="dur">6–8주</span>
+        </div>
+        <div class="card">
+          <header>
+            <h3>팹 검증 &amp; 목업 — 만들 수 있다는 말은 팹이 한다</h3>
+            <div class="who">철골 가공 팹 2사 이상 참여</div>
+          </header>
+          <p class="goal">소재가 좋아도 팹이 못 만들면 끝난다. 그리고 한 팹만 가능하면 공급 집중 리스크로 구매가 막는다.</p>
+          <ul class="out">
+            <li><span>다이어프램 <strong>표준 세트 프리팹</strong> 시제작 — 절단·용접 공수의 정형화 검증</span></li>
+            <li><span>접합부 C안 채택 시 <strong>블라인드볼트 현장 건립 시험</strong></span></li>
+            <li><span>동일 도면으로 <strong>2사 병행 제작</strong>해 부재 호환성 확인</span></li>
+          </ul>
+          <div class="judge">
+            <div class="pass"><b>통과</b>팹 2사 이상 “제작 가능” 확인서 + 목업 치수 정밀도 충족</div>
+            <div class="fail"><b>탈락</b>단일 팹만 가능 → 공급 집중 리스크로 구매 반려</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- G5 -->
+      <div class="gate">
+        <div class="rail">
+          <div class="code">G5</div>
+          <div class="when">D−1M → D</div>
+          <span class="dur">4–6주</span>
+        </div>
+        <div class="card">
+          <header>
+            <h3>표준부재 카탈로그 &amp; 공급계약</h3>
+            <div class="who">구매 주도 · 사업단 승인 · 설계 반영</div>
+          </header>
+          <p class="goal">여기서 처음으로 가격을 꺼낸다. 순서를 앞당기면 그 순간 기술 파트너가 아니라 벤더가 된다.</p>
+          <ul class="out">
+            <li><span><strong>표준 사이즈 8–12종으로 한정</strong>해 발주처 표준설계(Reference Design)에 등재</span></li>
+            <li><span><strong>프레임워크 계약 + 롤포밍 라인 슬롯 예약</strong> — 물량 우선권이 후판 대비 최대 차별점</span></li>
+            <li><span><strong>열연 지수 연동 가격 포뮬러</strong> — 원가 투명성을 열어야 구매가 움직인다</span></li>
+            <li><span>최초 적용 사이트에 대한 <strong>성능보증과 하자 책임 분담</strong> 명시</span></li>
+          </ul>
+          <div class="judge">
+            <div class="pass"><b>통과</b>기본설계 구조 개요서에 부재 형식이 등재됨</div>
+            <div class="fail"><b>탈락</b>Design Freeze 이후 도착 → 해당 사이트 포기, 차기 사이트로 이월</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <div class="eyebrow">Stakeholders</div>
+      <h2>발주처 내부 의사결정 지도</h2>
+      <p>구조재를 결정하는 사람은 한 명이 아니다. 스펙인은 설계에서 일어나고, 승인은 사업단에서, 계약은 구매에서 난다. 셋 중 하나만 공략하면 나머지 둘에서 막힌다.</p>
+    </div>
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr><th>주체</th><th>역할</th><th>이 제안에 대한 관심사</th><th>접근 우선순위</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><b>AI데이터센터 사업단</b></td><td>전략 · 표준화</td><td>공기 단축, 사이트 간 표준설계 재사용</td><td><span class="tag p1">스폰서 확보</span></td></tr>
+          <tr><td><b>구조설계</b><br><span class="mono" style="font-size:11.5px;color:var(--ink-3)">자체 또는 외주 구조사무소</span></td><td>실질적 스펙인 결정</td><td>규격 근거, 해석 데이터, 접합부 상세, 책임 소재</td><td><span class="tag p1">동시 착수</span></td></tr>
+          <tr><td><b>구매 · 조달</b></td><td>계약 · 가격 · 리드타임</td><td>공급보증, 복수 소싱 가능성, 가격 산식</td><td><span class="tag p1">동시 착수</span></td></tr>
+          <tr><td><b>철골 가공 팹</b></td><td>제작 실행</td><td>다이어프램 공수, 치공구, 기존 설비 대응력</td><td><span class="tag p2">G4에서 합류</span></td></tr>
+          <tr><td><b>건축 설계관리</b></td><td>도서 통합</td><td>상세 정합성, 마감·간섭</td><td><span class="tag p3">G2 이후</span></td></tr>
+          <tr><td><b>시공 · 현장</b></td><td>건립 · 시공성</td><td>양중, 건립 공수, 현장 용접 물량</td><td><span class="tag p3">G4 이후</span></td></tr>
+          <tr><td><b>감리</b></td><td>승인 · 검측</td><td>규격 적합, 시임·용접부 비파괴검사 절차</td><td><span class="tag p2">G3에서 사전 협의</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <div class="eyebrow">First meeting rules</div>
+      <h2>첫 미팅에서 반드시 / 절대로</h2>
+    </div>
+    <div class="duo">
+      <div class="panel">
+        <h3>반드시 한다</h3>
+        <ul>
+          <li><strong>약점을 먼저 말한다.</strong> 두께 상한, 다이어프램 공수, 실적 부재 — 그리고 각각의 대안</li>
+          <li><strong>상대의 도면을 요청한다.</strong> 이 제안 전체에서 가장 중요한 한 문장</li>
+          <li><strong>기본설계 착수 시점을 묻는다.</strong> 타겟은 이미 착공한 현장이 아니라 아직 설계 전인 사이트</li>
+          <li><strong>가공 가능 팹 리스트를 제시한다.</strong> 복수 소싱 가능성이 구매의 첫 질문이다</li>
+          <li><strong>회의록에 다음 단계 3항목을 적고 확인받는다.</strong></li>
+        </ul>
+      </div>
+      <div class="panel no">
+        <h3>절대 하지 않는다</h3>
+        <ul>
+          <li><strong>가격을 꺼내지 않는다.</strong> G5 이전의 가격 언급은 기술 파트너 지위를 포기하는 것</li>
+          <li><strong>카탈로그를 낭독하지 않는다.</strong> 사이즈표는 배포 자료로만 남긴다</li>
+          <li><strong>이미 골조가 올라간 현장을 타겟으로 삼지 않는다.</strong> 골조는 Hard Freeze 대상이다</li>
+          <li><strong>유리한 비교 케이스를 골라 오지 않는다.</strong> 그 순간 신뢰가 끝난다</li>
+          <li><strong>경쟁 공법을 깎지 않는다.</strong> PC·PSRC는 실적이 있고, 그 사실은 바뀌지 않는다</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="open">
+      <h3>G0 착수 전 사내에서 확정해야 할 미확인 항목</h3>
+      <ol>
+        <li><strong>현행 KS 규격번호와 강종</strong> — 건축구조용 냉간성형 각형강관 기준의 최신 개정본 대조</li>
+        <li><strong>롤포밍 생산 가능 최대 단면과 두께 상한</strong> — 프레스성형 대비 상한 차이를 명시</li>
+        <li><strong>CFT 무피복 내화구조 인정서의 적용 범위</strong> — 단면·강도·하중비 조건</li>
+        <li><strong>모서리 냉간가공부 인성 및 시임 위치 관리 기준</strong> — 시임이 모서리에 오지 않는다는 근거</li>
+        <li><strong>다이어프램용 판재의 두께 범위</strong> — 후판을 줄이러 가서 후판을 부르지 않는다는 논리</li>
+        <li><strong>국내외 대형 각형강관 기둥 적용 실적</strong> — 데이터센터가 아니어도 무방</li>
+      </ol>
+    </div>
+  </section>
+
+  <footer>
+    <div>archi-struct-8-colors 패널 검토 결과 9.4 / 10. 잔여 0.6은 위 미확인 6개 항목이 사내에서 확정되면 해소된다.</div>
+    <div>본 문서는 구조재(골조 부재)에 한정한다. 전력 계통·냉각·인허가 리스크는 별도 검토 대상이다.</div>
+  </footer>
+
+</div>
