@@ -1,0 +1,467 @@
+<title>데이터센터 구조재 주간 브리핑</title>
+<style>
+:root{
+  --bg:#f3f1ec; --surface:#ffffff; --surface-2:#eae7e0; --border:#d8d4ca;
+  --text:#201d18; --muted:#6b665c; --accent:#b5502e; --accent-2:#2f5a6b;
+  --gray:#6b6b6b; --orange:#c8722f; --navy:#2c4a6e; --purple:#6d4a8f;
+  --green:#3e7a4f; --red:#b1392f; --gold:#a4791f;
+  --ok:#3e7a4f; --warn:#a4791f; --risk:#b1392f;
+  --lblue:#3f7fa6; --dblack:#2a2a2a; --pink:#a6527a; --dwhite:#7d7a72; --brown:#8a5a34;
+  --veto-bg:#f6e9e4; --veto-border:#c96a3e;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#17140f; --surface:#211d17; --surface-2:#2a251d; --border:#3a3327;
+    --text:#ece7dc; --muted:#a89d89; --accent:#e07a4e; --accent-2:#7fb3c9;
+    --gray:#a3a396; --orange:#e0955a; --navy:#7fa3c9; --purple:#b39bd6;
+    --green:#7fbd8f; --red:#e0796a; --gold:#d4ab5a;
+    --ok:#7fbd8f; --warn:#d4ab5a; --risk:#e0796a;
+    --lblue:#7fbbdc; --dblack:#c9c4b8; --pink:#dd93b6; --dwhite:#cfc9ba; --brown:#c78f5e;
+    --veto-bg:#2e2018; --veto-border:#e0955a;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#17140f; --surface:#211d17; --surface-2:#2a251d; --border:#3a3327;
+  --text:#ece7dc; --muted:#a89d89; --accent:#e07a4e; --accent-2:#7fb3c9;
+  --gray:#a3a396; --orange:#e0955a; --navy:#7fa3c9; --purple:#b39bd6;
+  --green:#7fbd8f; --red:#e0796a; --gold:#d4ab5a;
+  --ok:#7fbd8f; --warn:#d4ab5a; --risk:#e0796a;
+  --lblue:#7fbbdc; --dblack:#c9c4b8; --pink:#dd93b6; --dwhite:#cfc9ba; --brown:#c78f5e;
+  --veto-bg:#2e2018; --veto-border:#e0955a;
+}
+*{box-sizing:border-box;}
+body{
+  margin:0; background:var(--bg); color:var(--text);
+  font-family: ui-sans-serif, "Segoe UI", "Noto Sans KR", system-ui, sans-serif;
+  line-height:1.5;
+}
+.wrap{max-width:1040px; margin:0 auto; padding:48px 24px 96px;}
+.masthead{
+  display:flex; flex-direction:column; gap:6px; margin-bottom:8px;
+  border-bottom:2px solid var(--text); padding-bottom:20px;
+}
+.eyebrow{
+  font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+  font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--accent);
+}
+h1{
+  font-family: Georgia, "Iowan Old Style", "Noto Serif KR", serif;
+  font-size:clamp(28px,4.5vw,42px); margin:2px 0 4px; text-wrap:balance; font-weight:700;
+}
+.meta{display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px; color:var(--muted); font-size:14px;}
+.regions{
+  display:grid; grid-template-columns:repeat(5,1fr); gap:2px; margin:28px 0 40px;
+  background:var(--border); border:1px solid var(--border); border-radius:10px; overflow:hidden;
+}
+.region-chip{background:var(--surface); padding:14px 8px; text-align:center;}
+.region-chip .flag{font-size:20px; display:block; margin-bottom:4px;}
+.region-chip .name{font-size:12px; color:var(--muted); letter-spacing:.02em;}
+section.card{
+  background:var(--surface); border:1px solid var(--border); border-radius:12px;
+  padding:26px 28px; margin-bottom:20px;
+}
+.card h2{
+  font-family: Georgia, "Noto Serif KR", serif; font-size:20px; margin:0 0 4px;
+  display:flex; align-items:center; gap:10px;
+}
+.card .region-sub{color:var(--muted); font-size:13px; margin-bottom:16px;}
+.item{padding:14px 0; border-top:1px solid var(--border);}
+.item:first-of-type{border-top:none; padding-top:4px;}
+.item h3{font-size:15.5px; margin:0 0 6px; font-weight:600;}
+.item p{margin:0 0 8px; font-size:14.5px; color:var(--text);}
+.item a{color:var(--accent-2); font-size:13px; text-decoration:none; word-break:break-all;}
+.item a:hover{text-decoration:underline;}
+.tags{display:flex; gap:6px; flex-wrap:wrap; margin-top:8px;}
+.tag{
+  font-size:11px; padding:3px 9px; border-radius:99px; border:1px solid currentColor;
+  font-family: ui-monospace, Consolas, monospace; letter-spacing:.03em;
+}
+.tag.gray{color:var(--gray);} .tag.orange{color:var(--orange);} .tag.navy{color:var(--navy);}
+.tag.purple{color:var(--purple);} .tag.green{color:var(--green);} .tag.red{color:var(--red);} .tag.gold{color:var(--gold);}
+
+.mat-filter{
+  display:flex; gap:8px; flex-wrap:wrap; margin:24px 0 32px; padding:14px 16px;
+  background:var(--surface); border:1px solid var(--border); border-radius:10px; align-items:center;
+}
+.mat-filter .label{font-size:12px; color:var(--muted); letter-spacing:.04em; margin-right:4px;}
+.mat-btn{
+  font-family: ui-monospace, Consolas, monospace; font-size:12.5px; letter-spacing:.02em;
+  padding:6px 14px; border-radius:99px; border:1px solid var(--border); background:transparent;
+  color:var(--text); cursor:pointer; transition:background .15s, border-color .15s, color .15s;
+}
+.mat-btn:hover{border-color:var(--accent);}
+.mat-btn.active{background:var(--text); color:var(--bg); border-color:var(--text);}
+.mat-badge{
+  font-size:10.5px; padding:2px 8px; border-radius:5px; font-weight:700;
+  letter-spacing:.02em; display:inline-block;
+}
+.mat-badge.concrete{background:#8a8378; color:#fff;}
+.mat-badge.steel{background:var(--accent); color:#fff;}
+.mat-badge.wood{background:var(--green); color:#fff;}
+.mat-badge.other{background:var(--muted); color:var(--bg);}
+.item[data-hidden="1"]{display:none;}
+.card[data-empty="1"]{display:none;}
+.reco{
+  display:flex; gap:16px; padding:16px 0; border-top:1px solid var(--border); align-items:flex-start;
+}
+.reco:first-of-type{border-top:none;}
+.reco .rank{
+  font-family:Georgia,"Noto Serif KR",serif; font-size:26px; font-weight:700; color:var(--accent);
+  flex:none; width:34px;
+}
+.reco h3{margin:0 0 4px; font-size:16px;}
+.reco p{margin:0; font-size:14px; color:var(--text);}
+.reco .why{margin-top:6px; font-size:12.5px; color:var(--muted);}
+.panel.reco-panel{border:1px solid var(--accent); background:var(--surface);}
+.panel.reco-panel h2{color:var(--accent);}
+
+.dist-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:16px;}
+@media (max-width:760px){.dist-grid{grid-template-columns:1fr;}}
+.dist-card{
+  background:var(--surface); border:1px solid var(--border); border-radius:10px;
+  padding:16px 18px; border-left:4px solid var(--dist-color, var(--border));
+}
+.dist-card h3{margin:0 0 8px; font-size:14.5px; display:flex; align-items:center; gap:8px;}
+.dist-card .verdict{
+  display:inline-block; font-size:11px; font-family:ui-monospace,Consolas,monospace;
+  padding:2px 9px; border-radius:99px; margin-bottom:8px; letter-spacing:.02em;
+}
+.verdict.go{background:color-mix(in srgb, var(--ok) 18%, transparent); color:var(--ok); border:1px solid var(--ok);}
+.verdict.conditional{background:color-mix(in srgb, var(--warn) 18%, transparent); color:var(--warn); border:1px solid var(--warn);}
+.verdict.no{background:color-mix(in srgb, var(--risk) 18%, transparent); color:var(--risk); border:1px solid var(--risk);}
+.dist-card p{margin:0 0 6px; font-size:13px; line-height:1.55;}
+.dist-card .signal{font-size:11.5px; color:var(--muted); font-style:italic;}
+.veto-box{
+  background:var(--veto-bg); border:1px solid var(--veto-border); border-radius:10px;
+  padding:14px 18px; margin-top:16px; font-size:13px; line-height:1.6;
+}
+.veto-box b{color:var(--veto-border);}
+.adv-grid{display:grid; grid-template-columns:1fr 1fr; gap:18px;}
+@media (max-width:640px){.adv-grid{grid-template-columns:1fr;}}
+.adv-col{background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:18px 20px;}
+.adv-col h3{
+  margin:0 0 12px; font-size:15px; display:flex; align-items:center; gap:8px;
+  padding-bottom:10px; border-bottom:1px solid var(--border);
+}
+.adv-list{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:12px;}
+.adv-list li{font-size:13.5px; line-height:1.55; padding-left:16px; position:relative;}
+.adv-list li::before{content:"—"; position:absolute; left:0; color:var(--accent);}
+.adv-list b{display:block; font-size:14px; margin-bottom:2px;}
+.panel{
+  background:var(--surface-2); border:1px solid var(--border); border-radius:12px;
+  padding:26px 28px; margin:32px 0;
+}
+.panel h2{font-family:Georgia,"Noto Serif KR",serif; font-size:19px; margin:0 0 16px;}
+.expert{display:flex; gap:12px; padding:10px 0; border-top:1px dashed var(--border);}
+.expert:first-of-type{border-top:none;}
+.expert .dot{width:10px; height:10px; border-radius:50%; margin-top:6px; flex:none;}
+.expert b{font-size:14px;}
+.expert p{margin:2px 0 0; font-size:14px; color:var(--text);}
+.priority{
+  display:flex; gap:14px; align-items:flex-start; padding:12px 0; border-top:1px solid var(--border);
+}
+.priority:first-of-type{border-top:none;}
+.priority .num{
+  font-family:ui-monospace,Consolas,monospace; font-size:13px; color:var(--accent);
+  background:var(--surface); border:1px solid var(--border); border-radius:6px;
+  padding:2px 8px; flex:none;
+}
+footer{margin-top:40px; padding-top:20px; border-top:1px solid var(--border); color:var(--muted); font-size:12.5px;}
+footer a{color:var(--accent-2);}
+</style>
+
+<div class="wrap">
+  <div class="masthead">
+    <span class="eyebrow">Weekly Digest · con-8-colors 패널 분석 · 구조재(Structural Materials) 특별판</span>
+    <h1>데이터센터 구조재 주간 브리핑</h1>
+    <div class="meta">
+      <span>발행일 2026-08-21 · 대상 기간 2026-08-14 ~ 2026-08-21 · 철골구조재/PC구조재 중심 재편집</span>
+      <span>수신 pys2019@gmail.com</span>
+    </div>
+  </div>
+
+  <div class="panel reco-panel">
+    <h2>🎯 한국 철강사 임원 추천 — 신규 사업 아이템 Top 3 <span style="font-size:12px;color:var(--muted);font-weight:400;">(구조재 중심 재편집)</span></h2>
+    <p style="margin:-6px 0 18px;font-size:13.5px;color:var(--muted)">한국 철강사의 강점 — 전세계 50개국 이상 코일센터 네트워크(현지 가공·즉납), 미국·인도·인도네시아 현지 제선·제강 기반(현지산 인정) — 을 이번 주 <b>구조재(내화강재·형강·PC 골조)</b> 수요 신호에 대입한 추천. ①번은 이미 국내에서 실제 진행 중인 사례.</p>
+    <div class="reco">
+      <span class="rank">01</span>
+      <div>
+        <h3>설계 단계 조인트 강구조 모델 — "내화강재+고강도 형강" 패키지 개발</h3>
+        <p>현대제철이 한미글로벌과 손잡고 AI 데이터센터·반도체 공장용 내화강재·고강도 형강을 설계 단계부터 공동 분석해 최적화된 강구조 모델을 제공하는 사업을 이미 시작했음. 자재 단품 공급을 넘어 <b>설계사(엔지니어링)와 조인트로 구조 모델 자체를 표준화</b>하는 방식이라, 발주처는 개별 자재 스펙 검증 없이 "검증된 강구조 패키지"를 그대로 채택할 수 있음. 다른 국내 철강사도 유사 조인트 모델을 벤치마킹할 시점.</p>
+        <p class="why">근거: 🇰🇷 현대제철-한미글로벌 강구조 모델 공동개발 기사(내화강재·고강도 형강), 🟡PM "인허가 연계 지연 회피" 코멘트</p>
+      </div>
+    </div>
+    <div class="reco">
+      <span class="rank">02</span>
+      <div>
+        <h3>All-PC 하이브리드 면진시스템 대응 PC 구조재 라인</h3>
+        <p>국내에서 RC코어+PC골조+면진장치 방식을 넘어 건물 전체를 PC화(All-PC)하고 하이브리드 면진시스템을 적용하는 공법이 데이터센터向으로 부상 중. 철강사가 PC부재 제작사와 제휴해 PC 골조에 들어가는 고강도 철근·매입철물·면진장치 연결부 강재를 패키지로 공급하면, 순수 철골(CFS) 대비 내진·화재안전 요구가 높은 국내·일본向 데이터센터에서 차별화 가능.</p>
+        <p class="why">근거: 🇰🇷 All-PC 하이브리드 면진시스템 기사, 🇯🇵 지진 관련 내진규격에 민감한 일본유통 코멘트</p>
+      </div>
+    </div>
+    <div class="reco">
+      <span class="rank">03</span>
+      <div>
+        <h3>미국·동남아 현지 제강 기반 콜드폼드 스틸(CFS) 구조 프레임</h3>
+        <p>미국은 콘크리트 대비 시공 속도 우위로 CFS 채택이 늘고 있지만 $130B 규모 프로젝트가 인허가·전력 지연을 겪는 상황. 한국 철강사가 미국 현지 제선·제강 설비에서 생산한 강재로 CFS 구조 프레임을 공급하면 "현지 생산" 요건을 충족시키면서 리드타임을 단축할 수 있음. 동남아(말레이시아)向으로는 코일센터 기반 모듈형 구조재로 확장.</p>
+        <p class="why">근거: 🇺🇸 CFS 시공 속도 우위 기사 + $130B 프로젝트 지연 기사, 🔴건축주·🟡PM 공기단축 최우선 코멘트</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>📣 발주처·PM이 한국 철강사에서 기대할 수 있는 장점</h2>
+    <p style="margin:-6px 0 18px;font-size:13.5px;color:var(--muted)">🔴건축주와 🟡PM이 최우선시하는 "공사기간 단축"과 리스크 관리 관점에서, 한국 철강사가 실제 영업 현장에서 어필할 수 있는 포인트</p>
+    <div class="adv-grid">
+      <div class="adv-col">
+        <h3>🔴 건축주(발주처) 관점</h3>
+        <ul class="adv-list">
+          <li><b>서비스 오픈 지연 리스크 축소</b>미국 현지 제강 기반 공급 시 해상 운송·통관 없이 현지 압연·가공이 가능해, 자재 리드타임이 데이터센터 오픈 일정의 변수가 되지 않음.</li>
+          <li><b>단일 공급사로 다국가 프로젝트 표준화</b>50개국+ 코일센터 네트워크로 한국·미국·인도·인도네시아 등 여러 국가에 동시에 짓는 발주처도 스펙·품질 기준이 동일한 자재를 한 공급사에서 받을 수 있어 시공 품질 편차를 줄임.</li>
+          <li><b>현지산 요건·관세 이슈 사전 해소</b>미국·인도·인도네시아 현지 제선·제강 기반이 있어 현지 조달 규정(관세, 현지화 비율)을 별도 대응 없이 충족 — 인허가·통관 단계에서 예상치 못한 지연을 예방.</li>
+          <li><b>내화·인증 스펙 일괄 충족</b>코일센터의 현지 가공 역량으로 데이터센터 특화 스펙(내화등급, 저탄소 인증 등)을 표준 옵션으로 사전 준비해, 개별 인증 획득에 따른 대기 시간을 줄임.</li>
+        </ul>
+      </div>
+      <div class="adv-col">
+        <h3>🟡 PM(감독) 관점</h3>
+        <ul class="adv-list">
+          <li><b>공정표 예측 가능성 향상</b>현지 생산·현지 가공 구조는 국제 해상운송 변수(선복 부족, 통관 지연)를 공정표에서 제거해 마일스톤 준수율을 높임.</li>
+          <li><b>인허가 병목 사전 제거</b>저탄소 인증, 내화 시험성적서 등을 코일센터 단계에서 미리 확보한 "사전 인증 SKU"를 활용하면, 자재 인증이 인허가 절차의 병목이 되는 상황을 구조적으로 피할 수 있음.</li>
+          <li><b>협력업체 조율 단순화</b>구조재·내화재·인클로저를 하나의 공급망(코일센터 네트워크)에서 통합 조달하면, 자재사 다변화에 따른 발주·검수·클레임 프로세스가 단순해짐.</li>
+          <li><b>공사비-공기 트레이드오프 방어</b>현지 가공으로 물류비 절감분을 공기 단축에 재투자할 수 있어, "자재비 절감이 공기 지연으로 상쇄되는" 리스크를 최소화.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>🔍 현지 유통 전문가 리얼리티 체크</h2>
+    <p style="margin:-6px 0 18px;font-size:13.5px;color:var(--muted)">위 Top3·어필 포인트는 이론·기술적 실현 가능성 기준. 아래는 각국 현지 건설자재 유통 전문가가 보는 "지금 실제로 가능한가"에 대한 최종 검증이며, 충돌 시 이 판단을 기본값으로 삼음.</p>
+    <div class="dist-grid">
+      <div class="dist-card" style="--dist-color:var(--dblack)">
+        <h3>⚫ 미국유통</h3>
+        <span class="verdict conditional">조건부 가능</span>
+        <p>현지 제강 기반만으로는 부족 — Buy America/Buy American Act 적용 여부는 발주처(연방·주정부 관련 프로젝트인지)에 따라 다르고, 민간 데이터센터라도 대형 유통사(Two-step distributor)와의 물량 계약이 선행되어야 실제 납품이 가능. ASTM/ICC 인증과 주(州)별 빌딩코드 편차 대응도 별도 과제.</p>
+        <p class="signal">최근 변화: $130B 규모 프로젝트 지연 사태로 유통사들이 신규 공급사 승인에 더 보수적으로 전환 중(확인 필요 — 검증되지 않은 시장 신호)</p>
+      </div>
+      <div class="dist-card" style="--dist-color:var(--pink)">
+        <h3>🩷 일본유통</h3>
+        <span class="verdict conditional">조건부 가능(장기 관계 필요)</span>
+        <p>일본은 상사(商社)를 경유하는 계열화된 유통 구조가 강해, 한국 철강사가 PowerX 같은 신생 컨테이너 DC 업체에 직접 공급하려 해도 최소 1~2년의 신뢰 구축 기간이 통상적. JIS 인증과 1일 단위로 민감한 납기 준수 실적을 먼저 증빙해야 상사 네트워크 진입이 가능.</p>
+        <p class="signal">최근 변화: 자재비 인플레(21~24%)로 일본 상사들이 해외 대체 공급처를 적극 탐색 중이라는 신호 — 진입 문턱이 예년보다 낮아지는 국면(확인 필요)</p>
+      </div>
+      <div class="dist-card" style="--dist-color:var(--dwhite)">
+        <h3>⚪ 유럽유통</h3>
+        <span class="verdict conditional">조건부 가능(EPD 선확보 필수)</span>
+        <p>CE 마킹과 CPR 적합성선언(DoP)은 기본 요건이고, 이번 주 뉴스의 "저탄소 인증" 흐름은 EPD(환경성적표지) 데이터 없이는 시작조차 어려움. 한국 철강사가 인도·미국 현지 저탄소 인증을 확보해도 EU 상호인정 범위에 들지 않으면 별도로 EPD를 재취득해야 함.</p>
+        <p class="signal">최근 변화: CBAM(탄소국경조정) 적용 범위 확대 논의가 진행 중 — 철강 품목의 EU 수출 비용 구조에 영향 가능(확인 필요)</p>
+      </div>
+      <div class="dist-card" style="--dist-color:var(--brown)">
+        <h3>🟤 인니유통</h3>
+        <span class="verdict no">현재는 불가능(선결조건 있음)</span>
+        <p>인도네시아 현지 제강 기반이 있어도, 공공·국책 성격이 섞인 데이터센터 프로젝트(IKN 신수도 인접 인프라 등)는 TKDN(현지생산비율) 미달 시 입찰 자격 자체가 박탈됨. 단순 현지 생산시설 보유만으로는 부족하고, 현지 합작법인(JV) 또는 현지 파트너·에이전트 구조가 선행되어야 함.</p>
+        <p class="signal">최근 변화: 말레이시아 데이터센터 붐이 인접국 인니로 파급될 조짐(확인 필요 — 검증되지 않은 시장 신호)</p>
+      </div>
+      <div class="dist-card" style="--dist-color:var(--lblue); grid-column:1 / -1;">
+        <h3>🩵 한국유통</h3>
+        <span class="verdict go">지금 진출 가능(국내 기반)</span>
+        <p>국내는 대리점망·시공사 네트워크가 이미 촘촘하나, 데이터센터向 대량·장기 발주는 기존 조달청 등록 물량과 결이 달라 별도의 전담 영업 조직이 필요. 현대건설·대우건설 등이 데이터센터 전담 TF를 신설 중인 만큼, 이들과의 직접 관계 형성이 코일센터 SKU보다 우선.</p>
+        <p class="signal">최근 변화: MW당 건설비 상승과 대형 건설사의 데이터센터 전담 조직화가 동시에 진행 중 — 지금이 관계 형성의 적기</p>
+      </div>
+    </div>
+    <div class="veto-box">
+      <b>⚠️ 현지 리얼리티체크 종합:</b> Top3 아이템 중 <b>①미국 CFS 라인</b>은 대형 유통 파트너 계약이 선행되지 않으면 실행 불가 수준으로 하향 조정, <b>②동남아 코일센터 모델</b>은 인도네시아向으로 확장 시 TKDN·JV 요건이 선결조건, <b>③인도 저탄소 인증</b>은 유럽 EPD 상호인정 범위 밖이라면 별도 인증 트랙 필요. 실행 우선순위는 이 제약을 전제로 재조정함.
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>🗣️ 그레이(팀장) 주재 토론 — 발언 순서: 인디고 → 레드 → 골드 → 나머지</h2>
+    <p style="margin:-6px 0 18px;font-size:13.5px;color:var(--muted)">con-8-colors 신규 페르소나 🟦인허가(국내 인허가 담당 공무원)를 반영해 Top3 실행 우선순위를 재검토한 회의록</p>
+    <div class="expert"><span class="dot" style="background:var(--gray)"></span><div><b>🔘 기술/그레이 (팀장)</b><p>이번 주 Top3(①미국 CFS ②동남아 코일센터 ③인도 저탄소 인증)를 다시 검토합니다. 인허가가 막히면 나머지 논의의 전제가 무너지므로 인디고부터, 이어서 레드·골드, 마지막으로 나머지가 보완하는 순서로 갑니다.</p></div></div>
+    <div class="expert"><span class="dot" style="background:var(--navy)"></span><div><b>🟦 인허가/인디고 (1순위 발언)</b><p>Top3 자체는 해외(미국·동남아·인도) 사업이라 제 소관 밖이지만, 이 강재·공법을 <b>국내 데이터센터에 역수입 적용</b>하는 순간 별도 트랙이 필요합니다. 해외에서 받은 EPD·저탄소 인증은 국내 건축위원회 심의에서 그대로 인정되지 않으며, 국내 선례가 없으면 최소 2~3회 보완요청·재심의를 원칙으로 잡아야 합니다. <b>[🚫 인허가 리스크]</b> 지금 우선순위에 이 국내 적용 트랙이 빠져 있습니다.</p></div></div>
+    <div class="expert"><span class="dot" style="background:var(--red)"></span><div><b>🔴 건축주/레드 (2순위 발언)</b><p>인디고 말이 맞습니다. 인허가 재심의가 2~3회 걸리면 그 자체가 최대 지연 요인입니다. 국내 데이터센터에도 이 강재를 쓸 계획이 있다면 인허가 트랙을 지금 바로 병렬로 시작해야, 자재의 리드타임 단축 효과가 실제로 발주처에 전달됩니다.</p></div></div>
+    <div class="expert"><span class="dot" style="background:var(--gold)"></span><div><b>🟡 PM/골드 (3순위 발언)</b><p>공정표에 반영하겠습니다. 국내 적용을 염두에 둔다면 인허가용 성능시험을 이번 주부터 미국 CFS 공급 계약 협상과 병행 착수해야 2~3회 재심의를 흡수할 수 있습니다. 순수 해외 사업이라면 이 항목은 빠지므로, "국내 적용 여부 결정"이 모든 것의 선행 과제입니다.</p></div></div>
+    <div class="expert"><span class="dot" style="background:var(--orange)"></span><div><b>🟠 시장/오렌지</b><p>국내 적용을 결정한다면, 최근 TF를 신설한 현대건설·대우건설 등과의 관계 형성이 인허가 심의보다 먼저 움직여야 할 수도 있습니다.</p></div></div>
+    <div class="expert"><span class="dot" style="background:var(--navy)"></span><div><b>🔵 재무/네이비</b><p>국내 인허가 병행 트랙은 추가 시험비·인증비가 발생합니다. 해외 3개 아이템 ROI에 이 비용을 반영할지부터 결정해야 순위가 흔들리지 않습니다.</p></div></div>
+    <div class="expert"><span class="dot" style="background:var(--purple)"></span><div><b>🟣 설계/퍼플</b><p>국내 심의용 시험은 실제 시공 조건(모듈 접합부 등)과 동일하게 진행해야 인디고가 말한 "시험조건 불일치 반려"를 피할 수 있습니다.</p></div></div>
+    <div class="expert"><span class="dot" style="background:var(--green)"></span><div><b>🟢 교수/그린</b><p>국내 최초 적용 사례는 공모전·학술 발표 소재로는 좋지만, 인허가 통과가 항상 먼저입니다.</p></div></div>
+  </div>
+
+  <div class="masthead" style="border-bottom:1px solid var(--border); margin-top:8px;">
+    <span class="eyebrow">Weekly Digest · 지역별 뉴스 상세</span>
+    <h1 style="font-size:22px;">이번 주 데이터센터 건설자재 뉴스</h1>
+  </div>
+
+  <div class="regions">
+    <div class="region-chip"><span class="flag">🇰🇷</span><span class="name">한국</span></div>
+    <div class="region-chip"><span class="flag">🇯🇵</span><span class="name">일본</span></div>
+    <div class="region-chip"><span class="flag">🇺🇸</span><span class="name">미국</span></div>
+    <div class="region-chip"><span class="flag">🇲🇾</span><span class="name">말레이시아</span></div>
+    <div class="region-chip"><span class="flag">🇪🇺</span><span class="name">유럽</span></div>
+  </div>
+
+  <div class="mat-filter" id="matFilter">
+    <span class="label">구조재 구분</span>
+    <button class="mat-btn active" data-mat="all">전체</button>
+    <button class="mat-btn" data-mat="concrete">PC구조재(프리캐스트)</button>
+    <button class="mat-btn" data-mat="steel">철골구조재</button>
+    <button class="mat-btn" data-mat="wood">목구조재</button>
+    <button class="mat-btn" data-mat="other">기타/간접자재</button>
+  </div>
+
+  <section class="card" data-region="kr">
+    <h2>🇰🇷 한국</h2>
+    <div class="region-sub">철강사·설계사 조인트 강구조 모델, All-PC 면진공법 부상</div>
+    <div class="item" data-material="steel">
+      <h3>현대제철-한미글로벌, AI 데이터센터·반도체 공장용 강구조 모델 공동개발 <span class="mat-badge steel">철골구조재</span></h3>
+      <p>내화강재·고강도 형강 등 건설용 강재를 설계 단계부터 분석·적용해 첨단 산업시설에 최적화된 강구조 모델을 고객사에 제공. 자재 단품이 아닌 "설계+구조 패키지" 형태로 공급하는 것이 핵심.</p>
+      <a href="https://www.hankyung.com/article/2026082029771" target="_blank" rel="noopener" style="display:block;margin-bottom:2px;">hankyung.com — 한국경제</a>
+      <a href="https://www.asiatoday.co.kr/kn/view.php?key=20260820010006564" target="_blank" rel="noopener" style="display:block;">asiatoday.co.kr — 아시아투데이</a>
+      <div class="tags"><span class="tag gray">기술</span><span class="tag purple">설계</span><span class="tag gold">PM</span></div>
+    </div>
+    <div class="item" data-material="concrete">
+      <h3>데이터센터 全PC화 "하이브리드 면진시스템" 부상 <span class="mat-badge concrete">PC구조재</span></h3>
+      <p>기존 RC코어+PC골조+면진장치 구조에서 한 발 더 나아가 건물 전체를 PC화(All-PC)한 하이브리드 면진시스템이 지진 대응 성능을 극대화하는 방식으로 주목받는 중.</p>
+      <a href="https://m.dnews.co.kr/m_home/view.jsp?idxno=202605071049277040808" target="_blank" rel="noopener">dnews.co.kr — 대한경제</a>
+      <div class="tags"><span class="tag purple">설계</span><span class="tag red">건축주</span></div>
+    </div>
+    <div class="item" data-material="other">
+      <h3>포스코, 미래수요개발실 신설 — 데이터센터용 냉각수 탱크·특화강 공동개발 <span class="mat-badge other">기타(설비연계강재)</span></h3>
+      <p>포스코는 데이터센터용 냉각수 탱크와 반도체 공장용 특화강을, 현대제철은 내외장재·구조재·ESS 연계 패키지 공급을 각각 전담 조직을 꾸려 추진 중 — 국내 철강 3사 모두 데이터센터向 조직 재편이 본격화.</p>
+      <a href="https://www.snmnews.com/news/articleView.html?idxno=568988" target="_blank" rel="noopener">snmnews.com — 철강금속신문</a>
+      <div class="tags"><span class="tag gray">기술</span><span class="tag orange">시장</span></div>
+    </div>
+  </section>
+
+  <section class="card" data-region="jp">
+    <h2>🇯🇵 일본</h2>
+    <div class="region-sub">자재비 인플레 → 모듈화·컨테이너형 전환</div>
+    <div class="item" data-material="other">
+      <h3>2021년 이후 자재비 21~24% 인플레, 모듈화·프리팹 전원룸 확산 <span class="mat-badge other">기타(복합모듈)</span></h3>
+      <p>비용 상승 압박이 건설사들의 프리팹·모듈화 채택을 가속시키는 중.</p>
+      <a href="https://introl.com/blog/japan-data-center-power-crisis-hyperscaler-investment-2026" target="_blank" rel="noopener">introl.com</a>
+      <div class="tags"><span class="tag gray">기술</span><span class="tag gold">PM</span></div>
+    </div>
+    <div class="item" data-material="steel">
+      <h3>PowerX, 서버·전원·냉각·배터리 일체형 컨테이너 "Mega Power DC" 발표 <span class="mat-badge steel">철강(컨테이너)</span></h3>
+      <p>일체형 컨테이너 방식으로 시공 기간과 비용을 동시에 절감하는 신규 공법.</p>
+      <a href="https://newsonjapan.com/article/150389.php" target="_blank" rel="noopener">newsonjapan.com</a>
+      <div class="tags"><span class="tag red">건축주</span><span class="tag purple">설계</span></div>
+    </div>
+  </section>
+
+  <section class="card" data-region="us">
+    <h2>🇺🇸 미국</h2>
+    <div class="region-sub">기록적 지출과 대규모 지연이 공존</div>
+    <div class="item" data-material="other">
+      <h3>6월 건설 지출 $22.3B, 역대 2위 — 동시에 $130B 규모 75건 프로젝트 지연·중단 <span class="mat-badge other">기타(시장지표)</span></h3>
+      <p>수요는 사상 최고 수준이나 인허가·전력 계통 병목으로 상당수 프로젝트가 지연.</p>
+      <a href="https://news.constructconnect.com/data-center-construction-spending-hits-record-highs-bloomberg-constructconnect-discuss-whats-next-on-august-4" target="_blank" rel="noopener">constructconnect.com</a>
+      <div class="tags"><span class="tag navy">재무</span><span class="tag gold">PM</span></div>
+    </div>
+    <div class="item" data-material="steel">
+      <h3>콜드폼드 스틸(CFS) 구조 프레임, 콘크리트 대비 시공 속도 우위로 부상 <span class="mat-badge steel">철골구조재</span></h3>
+      <p>철골조 건물이 콘크리트조보다 훨씬 빠르게 골조·외피를 완성할 수 있어 채택 확대.</p>
+      <a href="https://buildsteel.org/projects/non-residential/data-centers-drive-construction-growth-opportunities-for-cold-formed-steel-framing-business/" target="_blank" rel="noopener">buildsteel.org</a>
+      <div class="tags"><span class="tag gray">기술</span><span class="tag red">건축주</span></div>
+    </div>
+  </section>
+
+  <section class="card" data-region="my">
+    <h2>🇲🇾 말레이시아</h2>
+    <div class="region-sub">8월 발주액이 이미 2025년 전체 초과</div>
+    <div class="item" data-material="other">
+      <h3>데이터센터 발주액 RM9.7B, 2025년 전체 실적 이미 상회 <span class="mat-badge other">기타(발주지표)</span></h3>
+      <p>조호르·스프링힐·서렌다 3개 허브에서 17~21개 시설이 파이프라인에 위치, 대형 시공사 중심 수주 확대.</p>
+      <a href="https://www.thestar.com.my/business/business-news/2026/08/14/large-contractors-to-lead-data-centre-boom" target="_blank" rel="noopener">thestar.com.my</a>
+      <div class="tags"><span class="tag orange">시장</span><span class="tag navy">재무</span></div>
+    </div>
+    <div class="item" data-material="other">
+      <h3>액체냉각 도입 확산(AirTrunk 등), 물·에너지 통합형 지속가능 설계 요구 증가 <span class="mat-badge other">기타(냉각설비)</span></h3>
+      <p>GPU 밀도 상승에 따른 냉각 부하 증가가 설비·자재 조달 계획에 새 변수로 작용.</p>
+      <a href="https://w.media/malaysia-enters-second-wave-of-data-center-boom-analyst/" target="_blank" rel="noopener">w.media</a>
+      <div class="tags"><span class="tag green">교수</span><span class="tag purple">설계</span></div>
+    </div>
+  </section>
+
+  <section class="card" data-region="eu">
+    <h2>🇪🇺 유럽</h2>
+    <div class="region-sub">저탄소 자재와 모듈형 구조재 확산</div>
+    <div class="item" data-material="concrete">
+      <h3>이음매 없는(jointless) 콘크리트, 내재탄소 최대 30% 절감 + 시공 속도 향상 <span class="mat-badge concrete">PC구조재</span></h3>
+      <p>EU ESG 의무규정 충족을 위한 저탄소 콘크리트 솔루션이 확산 중.</p>
+      <a href="https://www.datacenterdynamics.com/en/product-news/three-reasons-to-build-data-centers-with-sustainable-steel/" target="_blank" rel="noopener">datacenterdynamics.com</a>
+      <div class="tags"><span class="tag green">교수</span><span class="tag gray">기술</span></div>
+    </div>
+    <div class="item" data-material="steel">
+      <h3>ArcelorMittal 저탄소 튜브형 구조재, 모듈 조립시간 50~60% 단축 <span class="mat-badge steel">철강(튜브형)</span></h3>
+      <p>Legutio·Lexy의 모듈형 튜브 구조가 폐열회수·냉각계통과 통합되는 설계 사례 증가.</p>
+      <a href="https://tubular.arcelormittal.com/newsroom/steel-core-tomorrows-data-centers" target="_blank" rel="noopener">arcelormittal.com</a>
+      <div class="tags"><span class="tag gold">PM</span><span class="tag purple">설계</span></div>
+    </div>
+  </section>
+
+  <div class="panel">
+    <h2>7인 패널 종합 코멘트</h2>
+    <div class="expert"><span class="dot" style="background:var(--gray)"></span><div><b>🔘 기술</b><p>자재비 인플레(일본 21~24%)와 콜드폼드 스틸 확산은 같은 방향 — 원가 압박이 시공 속도가 빠른 자재로의 전환을 강제하고 있음.</p></div></div>
+    <div class="expert"><span class="dot" style="background:var(--orange)"></span><div><b>🟠 시장</b><p>말레이시아·한국 모두 수요가 공급을 앞서는 국면 — 신규 공급자에게는 진입 적기이나 가격 협상력은 발주처보다 시공사 쪽에 있음.</p></div></div>
+    <div class="expert"><span class="dot" style="background:var(--navy)"></span><div><b>🔵 재무</b><p>미국의 $130B 지연 사례는 자재사에도 리스크 — 수주는 늘어도 현금흐름 인식 시점이 불확실해질 수 있음.</p></div></div>
+    <div class="expert"><span class="dot" style="background:var(--purple)"></span><div><b>🟣 설계</b><p>유럽 모듈형 튜브재는 설계 자유도보다 "표준화된 반복 조립"에 최적화 — 커스텀 미관을 원하는 프로젝트엔 제약이 될 수 있음.</p></div></div>
+    <div class="expert"><span class="dot" style="background:var(--green)"></span><div><b>🟢 교수</b><p>EU ESG발 저탄소 자재 요구가 아시아로 확산되는 초기 신호 — 인증·시험성적서를 선제 확보한 자재사가 향후 우위.</p></div></div>
+    <div class="expert"><span class="dot" style="background:var(--red)"></span><div><b>🔴 건축주</b><p>일본 컨테이너형 일체화 공법이 공사기간 단축의 가장 급진적 사례 — 발주처 관점에서 벤치마크할 가치 있음.</p></div></div>
+    <div class="expert"><span class="dot" style="background:var(--gold)"></span><div><b>🟡 PM</b><p>이번 주 가장 큰 공기 리스크는 자재가 아니라 미국의 인허가·전력계통 지연 — 자재 리드타임 관리보다 인허가 트래킹이 우선.</p></div></div>
+  </div>
+
+  <div class="panel">
+    <h2>합의된 실행 우선순위 <span style="font-size:12px;color:var(--muted);font-weight:400;">(구조재 중심 재편집 — 국내 벤치마크 사례 반영)</span></h2>
+    <div class="priority"><span class="num">01</span><div><b>현대제철-한미글로벌 조인트 강구조 모델 벤치마킹 + 설계사 제휴 검토</b><p style="margin:4px 0 0;color:var(--muted);font-size:13.5px">국내 이미 실행 중인 사례 — 자재 단품 대신 "설계+구조 패키지" 공급 모델 자체 조사 착수 (2026-08-24)</p></div></div>
+    <div class="priority"><span class="num">02</span><div><b>국내 적용 여부 결정 + 결정 시 인허가 병행 트랙 즉시 착수</b><p style="margin:4px 0 0;color:var(--muted);font-size:13.5px">🟦인디고 최종 관문 원칙 — 국내 데이터센터向 적용을 고려한다면 성능시험을 지금 시작해야 2~3회 재심의를 흡수 가능 (2026-08-28)</p></div></div>
+    <div class="priority"><span class="num">03</span><div><b>미국 Two-step 유통 파트너 발굴 우선 착수</b><p style="margin:4px 0 0;color:var(--muted);font-size:13.5px">⚫미국유통 리얼리티체크 반영 — CFS 구조 프레임 사업은 해외 사업이라 인허가와 무관하므로 그대로 진행 (2026-08-31)</p></div></div>
+    <div class="priority"><span class="num">04</span><div><b>PC 구조재+면진장치 연결부 강재 패키지 공동개발 파트너 물색</b><p style="margin:4px 0 0;color:var(--muted);font-size:13.5px">All-PC 하이브리드 면진시스템 기사 반영 — 국내 PC 제작사와의 제휴 가능성 타진 (2026-09-07)</p></div></div>
+  </div>
+
+  <div class="panel reco-panel">
+    <h2>💡 뉴스 기반 신규 사업 모델 제안</h2>
+    <div class="reco">
+      <span class="rank">A</span>
+      <div>
+        <h3>"글로벌 현지생산·현지가공" DC 전용 공급 플랫폼</h3>
+        <p>단일 완제품 수출이 아니라, 한국 철강사의 전세계 50개국+ 코일센터와 미국·인도·인도네시아 현지 제강 기반을 하나의 네트워크로 묶어 "발주처가 프로젝트 소재 국가를 지정하면 해당 국가(또는 인접국) 코일센터·제강소에서 데이터센터 규격(내화등급, 방진, 저탄소 인증 등)에 맞춘 강재를 현지 가공해 납품"하는 구독형/계약형 공급 플랫폼. 미국의 잦은 프로젝트 지연, 말레이시아·유럽의 리드타임 단축 요구를 동시에 해결하며, 국가별 현지산 요건과 ESG 인증을 표준 옵션으로 내장.</p>
+        <p class="why">근거: 이번 주 5개 지역 뉴스 전체(미국 지연, 말레이시아·유럽 리드타임 단축 요구), 🟡PM "인허가·리드타임이 핵심 병목" 코멘트 + 한국 철강사의 코일센터·현지 제강 이중 인프라</p>
+      </div>
+    </div>
+    <div class="reco">
+      <span class="rank">B</span>
+      <div>
+        <h3>DC向 "패키지형 강재 SKU" 사전 인증 서비스</h3>
+        <p>일본 PowerX 컨테이너형 사례처럼 데이터센터는 구조재·내화재·인클로저가 한 세트로 발주되는 경향이 커지고 있음. 한국 철강사가 국가별 코일센터를 통해 CFS 프레임 + 내화 패널 + 컨테이너 인클로저를 하나의 사전 인증된 패키지 SKU로 표준화해 두면, 발주처·PM은 개별 자재 조달·인증 절차를 생략하고 곧바로 발주할 수 있어 인허가 연계 지연 리스크를 구조적으로 줄일 수 있음.</p>
+        <p class="why">근거: 🇯🇵 PowerX 일체형 컨테이너 기사, 🟡PM "인허가 연계 지연" 우려 코멘트, 한국 철강사 코일센터의 현지 가공 역량</p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    매주 일요일 자동 생성 · 다음 발행 2026-08-28 · con-8-colors 전문가 패널 스킬 기반 · 구조재(철골·PC구조) 중심 재편집판<br>
+    수집 범위: 한국 / 일본 / 미국 / 말레이시아 / 유럽 데이터센터 건설자재 관련 언론·블로그 보도
+  </footer>
+</div>
+
+<script>
+document.getElementById('matFilter').addEventListener('click', function(e){
+  var btn = e.target.closest('.mat-btn');
+  if(!btn) return;
+  this.querySelectorAll('.mat-btn').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+  var mat = btn.dataset.mat;
+  document.querySelectorAll('section.card').forEach(function(card){
+    var items = card.querySelectorAll('.item');
+    var visibleCount = 0;
+    items.forEach(function(item){
+      var match = mat === 'all' || item.dataset.material === mat;
+      item.dataset.hidden = match ? '0' : '1';
+      if(match) visibleCount++;
+    });
+    card.dataset.empty = visibleCount === 0 ? '1' : '0';
+  });
+});
+</script>
