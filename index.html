@@ -1,4 +1,4 @@
-<title>데이터센터 구조재 주간 브리핑</title>
+<title>데이터센터 통합 Package 수주 추진 계획</title>
 <style>
 :root{
   --bg:#f3f1ec; --surface:#ffffff; --surface-2:#eae7e0; --border:#d8d4ca;
@@ -172,66 +172,110 @@ footer a{color:var(--accent-2);}
 
 <div class="wrap">
   <div class="masthead">
-    <span class="eyebrow">Weekly Digest · con-8-colors 패널 분석 · 구조재(Structural Materials) 특별판</span>
-    <h1>데이터센터 구조재 주간 브리핑</h1>
+    <span class="eyebrow">SK에코플랜트 대상 · 각형강관 기둥 · 그룹사 합동</span>
+    <h1>데이터센터 통합 Package 수주 추진 계획</h1>
     <div class="meta">
-      <span>발행일 2026-08-21 · 대상 기간 2026-08-14 ~ 2026-08-21 · 철골구조재/PC구조재 중심 재편집</span>
-      <span>수신 pys2019@gmail.com</span>
+      <span>구성 4부 · 시장 브리핑에서 발주처 제안, 실무 일정, 사내 조율까지</span>
+      <span>최종 갱신 2026. 8. 23.</span>
     </div>
   </div>
 
   <style>
-    .dl-wrap{background:var(--surface); border:1px solid var(--border); border-radius:12px;
-      padding:26px 28px; margin:28px 0 20px;}
-    .dl-eyebrow{font-family:ui-monospace,"Cascadia Code",Consolas,monospace; font-size:12px;
+    .pk{background:var(--surface); border:1px solid var(--border); border-radius:12px;
+      padding:26px 28px; margin:28px 0 22px;}
+    .pk-eyebrow{font-family:ui-monospace,"Cascadia Code",Consolas,monospace; font-size:12px;
       letter-spacing:.14em; text-transform:uppercase; color:var(--accent);}
-    .dl-wrap h2{font-family:Georgia,"Noto Serif KR",serif; font-size:20px; margin:6px 0 4px;}
-    .dl-lede{margin:0 0 18px; font-size:13.5px; color:var(--muted);}
-    .dl-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:12px;}
-    .dl-card{display:flex; flex-direction:column; gap:7px; padding:16px 18px;
-      background:var(--surface-2); border:1px solid var(--border); border-radius:10px;
-      text-decoration:none; color:inherit; transition:border-color .15s, transform .15s;}
-    .dl-card:hover{border-color:var(--accent); transform:translateY(-2px);}
-    .dl-card:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
-    .dl-card .dl-role{font-family:ui-monospace,Consolas,monospace; font-size:11px;
-      letter-spacing:.06em; color:var(--accent-2);}
-    .dl-card.dl-internal .dl-role{color:var(--risk);}
-    .dl-card .dl-name{font-size:15.5px; font-weight:600; line-height:1.35;}
-    .dl-card .dl-desc{font-size:13px; color:var(--muted); line-height:1.5;}
-    .dl-card .dl-fmt{font-family:ui-monospace,Consolas,monospace; font-size:11px;
-      color:var(--muted); border-top:1px solid var(--border); padding-top:7px; margin-top:auto;}
-    .dl-note{margin:14px 0 0; font-size:12.5px; color:var(--muted);}
-    .dl-note b{color:var(--risk);}
-    @media (max-width:760px){ .dl-grid{grid-template-columns:1fr;} }
+    .pk h2{font-family:Georgia,"Noto Serif KR",serif; font-size:20px; margin:6px 0 4px;}
+    .pk-lede{margin:0 0 20px; font-size:13.5px; color:var(--muted);}
+    .pk-list{display:flex; flex-direction:column; gap:2px;
+      background:var(--border); border:1px solid var(--border); border-radius:10px; overflow:hidden;}
+    .pk-row{display:grid; grid-template-columns:58px 1fr 118px; gap:0 18px; align-items:center;
+      background:var(--surface-2); padding:16px 20px;
+      text-decoration:none; color:inherit; transition:background .15s;}
+    .pk-row:hover{background:var(--surface);}
+    .pk-row:focus-visible{outline:2px solid var(--accent); outline-offset:-3px;}
+    .pk-no{font-family:Georgia,"Noto Serif KR",serif; font-size:30px; font-weight:700;
+      color:var(--accent); line-height:1;}
+    .pk-body{display:flex; flex-direction:column; gap:4px; min-width:0;}
+    .pk-role{font-family:ui-monospace,Consolas,monospace; font-size:11px; letter-spacing:.06em;
+      color:var(--accent-2);}
+    .pk-row.pk-internal .pk-no{color:var(--risk);}
+    .pk-row.pk-internal .pk-role{color:var(--risk);}
+    .pk-name{font-size:16px; font-weight:600; line-height:1.35;}
+    .pk-desc{font-size:13px; color:var(--muted); line-height:1.5;}
+    .pk-fmt{font-family:ui-monospace,Consolas,monospace; font-size:11.5px; color:var(--muted);
+      text-align:right; white-space:nowrap;}
+    .pk-note{margin:16px 0 0; font-size:12.5px; color:var(--muted);}
+    .pk-note b{color:var(--risk);}
+    .pk-mark{display:flex; align-items:baseline; gap:14px; margin:34px 0 18px;
+      padding-bottom:12px; border-bottom:2px solid var(--text);}
+    .pk-mark .n{font-family:Georgia,"Noto Serif KR",serif; font-size:30px; font-weight:700;
+      color:var(--accent); line-height:1;}
+    .pk-mark h2{font-family:Georgia,"Noto Serif KR",serif; font-size:24px; margin:0;}
+    .pk-mark .sub{font-size:13px; color:var(--muted);}
+    @media (max-width:720px){
+      .pk-row{grid-template-columns:42px 1fr; gap:0 14px;}
+      .pk-no{font-size:24px;}
+      .pk-fmt{grid-column:2; text-align:left; margin-top:6px;}
+    }
   </style>
 
-  <div class="dl-wrap">
-    <span class="dl-eyebrow">SK에코플랜트 제안 · 각형강관 기둥</span>
-    <h2>제안 문서 세 종</h2>
-    <p class="dl-lede">같은 제안을 독자에 따라 세 가지 깊이로 나눠 두었습니다. 발주처에는 요약본만 나가고, 상세 문서는 실무 준비용이며, 그룹사 시뮬레이션은 사내에서만 씁니다.</p>
+  <div class="pk">
+    <span class="pk-eyebrow">추진 계획 구성</span>
+    <h2>네 개 문서로 나눈 이유</h2>
+    <p class="pk-lede">시장을 읽는 문서, 발주처에 내는 문서, 실무가 쓰는 문서, 사내에서만 쓰는 문서를 섞지 않았습니다. 독자가 다르면 담을 내용과 말투가 달라지기 때문입니다.</p>
 
-    <div class="dl-grid">
-      <a class="dl-card" href="struct4sk-brief.html">
-        <span class="dl-role">발주처 제출용</span>
-        <span class="dl-name">골조 기둥 부재 대안 제안</span>
-        <span class="dl-desc">기둥을 각형강관 충전기둥으로 바꿨을 때 발주처 공정표에서 무엇이 빠지는지 정리했습니다. 한계 네 가지를 먼저 밝힙니다.</span>
-        <span class="dl-fmt">인쇄 A4 세로 2쪽</span>
+    <div class="pk-list">
+      <a class="pk-row" href="#part1">
+        <span class="pk-no">1</span>
+        <span class="pk-body">
+          <span class="pk-role">시장 브리핑 · 이 페이지 아래</span>
+          <span class="pk-name">데이터센터 구조재 주간 브리핑</span>
+          <span class="pk-desc">구조재 수요 신호와 경쟁 동향을 주 단위로 정리합니다. 제안의 근거가 되는 시장 자료입니다.</span>
+        </span>
+        <span class="pk-fmt">웹 열람</span>
       </a>
-      <a class="dl-card" href="struct4sk.html">
-        <span class="dl-role">실무 준비용</span>
-        <span class="dl-name">각형강관 협업 제안 일정</span>
-        <span class="dl-desc">공급원 확인 결과, 두께 경계선, 착공 4개월과 6개월 두 시나리오의 주차별 일정을 담은 상세 문서입니다.</span>
-        <span class="dl-fmt">웹 열람</span>
+
+      <a class="pk-row" href="struct4sk-brief.html">
+        <span class="pk-no">2</span>
+        <span class="pk-body">
+          <span class="pk-role">발주처 제출용</span>
+          <span class="pk-name">골조 기둥 부재 대안 제시</span>
+          <span class="pk-desc">기둥을 각형강관 충전기둥으로 바꿨을 때 발주처 공정표에서 무엇이 빠지는지 정리했습니다. 한계 네 가지를 먼저 밝힙니다.</span>
+        </span>
+        <span class="pk-fmt">인쇄 A4 세로 2쪽</span>
       </a>
-      <a class="dl-card dl-internal" href="posco-team.html">
-        <span class="dl-role">사내 전용</span>
-        <span class="dl-name">그룹사 협업 미팅 시뮬레이션</span>
-        <span class="dl-desc">그룹사 네 곳의 역할 분담과 1차부터 3차까지 미팅 구성입니다. 1차에는 두 곳만 들어갑니다.</span>
-        <span class="dl-fmt">인쇄 A4 가로 1쪽</span>
+
+      <a class="pk-row" href="struct4sk.html">
+        <span class="pk-no">3</span>
+        <span class="pk-body">
+          <span class="pk-role">실무 준비용</span>
+          <span class="pk-name">각형강관 협업 제안 일정</span>
+          <span class="pk-desc">공급원 확인 결과, 두께 경계선, 착공 4개월과 6개월 두 시나리오의 주차별 일정을 담았습니다.</span>
+        </span>
+        <span class="pk-fmt">웹 열람</span>
+      </a>
+
+      <a class="pk-row pk-internal" href="posco-team.html">
+        <span class="pk-no">4</span>
+        <span class="pk-body">
+          <span class="pk-role">사내 전용</span>
+          <span class="pk-name">그룹사 협업 미팅 시뮬레이션</span>
+          <span class="pk-desc">그룹사 네 곳의 역할 분담과 1차부터 3차까지 미팅 구성입니다. 1차에는 두 곳만 들어갑니다.</span>
+        </span>
+        <span class="pk-fmt">인쇄 A4 가로 1쪽</span>
       </a>
     </div>
 
-    <p class="dl-note"><b>주의.</b> 세 번째 문서는 그룹사 내부 조율용입니다. 발주처에 전달하지 않습니다.</p>
+    <p class="pk-note"><b>주의.</b> 네 번째 문서는 그룹사 내부 조율용입니다. 발주처에 전달하지 않습니다.</p>
+  </div>
+
+  <div class="pk-mark" id="part1">
+    <span class="n">1</span>
+    <span>
+      <h2>데이터센터 구조재 주간 브리핑</h2>
+      <span class="sub">발행일 2026. 8. 21. · 대상 기간 2026. 8. 14. ~ 2026. 8. 21. · 철골구조재와 PC구조재 중심</span>
+    </span>
   </div>
 
   <div class="panel reco-panel">
